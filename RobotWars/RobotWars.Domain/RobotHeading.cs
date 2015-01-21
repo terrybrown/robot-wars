@@ -4,10 +4,13 @@ namespace RobotWars.Domain
 {
 	public class RobotHeading
 	{
-		private char _currentHeading;
-		private readonly char[] _validHeadings = { 'N', 'E', 'S', 'W' };
+		private Orientation _currentHeading;
+		private readonly Orientation[] _validHeadings = { Orientation.North, 
+															Orientation.East, 
+															Orientation.South,
+															Orientation.West };
 
-		public RobotHeading(char heading = 'N')
+		public RobotHeading(Orientation heading = Orientation.North)
 		{
 			_currentHeading = heading;
 		}
@@ -38,9 +41,9 @@ namespace RobotWars.Domain
 			return this;
 		}
 
-		public char GetHeading()
+		public string GetHeading()
 		{
-			return _currentHeading;
+			return _currentHeading.ToString().Substring(0, 1);	// better way than this, quick fix for now
 		}
 
 	}

@@ -1,20 +1,35 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace RobotWars.Domain
 {
 	public class RobotWarsGame
 	{
 		private GameArena arena;
-		private List<Robot> robots;
+		private readonly Lazy<List<Robot>> _robots = new Lazy<List<Robot>>();
  
 		public RobotWarsGame(GameArena arena)
 		{
 			this.arena = arena;
 		}
 
-		public void AddRobotToGame(int positionX, int positionY, char heading, string moves)
+		public void AddRobotToGame(int positionX, int positionY, Orientation heading, string moves)
 		{
-			robots.Add(new Robot(positionX, positionY, heading, moves, arena.GetArenaSize()));
+			_robots.Value.Add(new Robot(positionX, positionY, heading, moves, arena.GetArenaSize()));
+		}
+
+		public void PlayGame()
+		{
+			// at the moment, we shan't do anything in parallel in terms of letting the robots take
+			// out their turns in sequence, we just want to ensure that the output is as expected
+			foreach (var robot in _robots.Value)
+			{
+				robot.PerformProgrammedMoves();
+
+				Console.WriteLine("----------------------------------------------------");
+			}
+
+			Console.ReadKey();
 		}
 	}
 }

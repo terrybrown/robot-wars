@@ -5,10 +5,10 @@ namespace RobotWars.Domain.Tests.Unit
 	[TestFixture]
 	public class RobotHeadingTests
 	{
-		private const char NORTH = 'N';
-		private const char EAST = 'E';
-		private const char SOUTH = 'S';
-		private const char WEST = 'W';
+		private const Orientation NORTH = Orientation.North;
+		private const Orientation EAST	= Orientation.East;
+		private const Orientation SOUTH = Orientation.South;
+		private const Orientation WEST	= Orientation.West;
 
 		public class WithoutAnyTurnCommands
 		{
@@ -17,7 +17,7 @@ namespace RobotWars.Domain.Tests.Unit
 			{
 				var _heading = new RobotHeading(NORTH);
 
-				Assert.AreEqual(_heading.GetHeading(), NORTH);
+				Assert.AreEqual(_heading.GetHeading(), "N");
 			}
 
 			[Test]
@@ -25,7 +25,7 @@ namespace RobotWars.Domain.Tests.Unit
 			{
 				var _heading = new RobotHeading(SOUTH);
 
-				Assert.AreEqual(_heading.GetHeading(), SOUTH);
+				Assert.AreEqual("S", _heading.GetHeading());
 			}
 		}
 
@@ -38,7 +38,7 @@ namespace RobotWars.Domain.Tests.Unit
 
 				_heading.TurnLeft();
 
-				Assert.AreEqual(_heading.GetHeading(), WEST);
+				Assert.AreEqual("W", _heading.GetHeading());
 			}
 
 			[Test]
@@ -48,7 +48,7 @@ namespace RobotWars.Domain.Tests.Unit
 
 				_heading.TurnLeft();
 
-				Assert.AreEqual(_heading.GetHeading(), SOUTH);
+				Assert.AreEqual("S", _heading.GetHeading());
 			}
 
 			[Test]
@@ -58,7 +58,7 @@ namespace RobotWars.Domain.Tests.Unit
 
 				_heading.TurnLeft();
 
-				Assert.AreEqual(_heading.GetHeading(), EAST);
+				Assert.AreEqual("E", _heading.GetHeading());
 			}
 
 			[Test]
@@ -68,7 +68,7 @@ namespace RobotWars.Domain.Tests.Unit
 
 				_heading.TurnLeft();
 
-				Assert.AreEqual(_heading.GetHeading(), NORTH);
+				Assert.AreEqual("N", _heading.GetHeading());
 			}
 
 			[Test]
@@ -78,7 +78,7 @@ namespace RobotWars.Domain.Tests.Unit
 
 				_heading.TurnLeft().TurnLeft();
 
-				Assert.AreEqual(_heading.GetHeading(), WEST);
+				Assert.AreEqual("W", _heading.GetHeading());
 			}
 
 			[Test]
@@ -88,7 +88,7 @@ namespace RobotWars.Domain.Tests.Unit
 
 				_heading.TurnLeft().TurnLeft().TurnLeft();
 
-				Assert.AreEqual(_heading.GetHeading(), SOUTH);
+				Assert.AreEqual("S", _heading.GetHeading());
 			}
 
 			[Test]
@@ -98,7 +98,7 @@ namespace RobotWars.Domain.Tests.Unit
 
 				_heading.TurnLeft().TurnLeft().TurnLeft().TurnLeft();
 
-				Assert.AreEqual(_heading.GetHeading(), EAST);
+				Assert.AreEqual("E", _heading.GetHeading());
 			}
 
 		}
@@ -112,7 +112,7 @@ namespace RobotWars.Domain.Tests.Unit
 
 				_heading.TurnRight();
 
-				Assert.AreEqual(_heading.GetHeading(), EAST);
+				Assert.AreEqual("E", _heading.GetHeading());
 			}
 
 			[Test]
@@ -122,7 +122,7 @@ namespace RobotWars.Domain.Tests.Unit
 
 				_heading.TurnRight();
 
-				Assert.AreEqual(_heading.GetHeading(), NORTH);
+				Assert.AreEqual("N", _heading.GetHeading());
 			}
 
 			[Test]
@@ -132,7 +132,7 @@ namespace RobotWars.Domain.Tests.Unit
 
 				_heading.TurnRight();
 
-				Assert.AreEqual(_heading.GetHeading(), WEST);
+				Assert.AreEqual("W", _heading.GetHeading());
 			}
 
 			[Test]
@@ -142,7 +142,7 @@ namespace RobotWars.Domain.Tests.Unit
 
 				_heading.TurnRight();
 
-				Assert.AreEqual(_heading.GetHeading(), SOUTH);
+				Assert.AreEqual("S", _heading.GetHeading());
 			}
 
 			[Test]
@@ -152,7 +152,7 @@ namespace RobotWars.Domain.Tests.Unit
 
 				_heading.TurnRight().TurnRight();
 
-				Assert.AreEqual(_heading.GetHeading(), WEST);
+				Assert.AreEqual("W", _heading.GetHeading());
 			}
 
 			[Test]
@@ -162,7 +162,7 @@ namespace RobotWars.Domain.Tests.Unit
 
 				_heading.TurnRight().TurnRight().TurnRight();
 
-				Assert.AreEqual(_heading.GetHeading(), NORTH);
+				Assert.AreEqual("N", _heading.GetHeading());
 			}
 
 			[Test]
@@ -172,7 +172,7 @@ namespace RobotWars.Domain.Tests.Unit
 
 				_heading.TurnRight().TurnRight().TurnRight().TurnRight();
 
-				Assert.AreEqual(_heading.GetHeading(), EAST);
+				Assert.AreEqual("E", _heading.GetHeading());
 			}
 
 		}
