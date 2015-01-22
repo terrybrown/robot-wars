@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using NUnit.Framework;
 
 namespace RobotWars.Domain.Tests.Unit
@@ -6,8 +7,11 @@ namespace RobotWars.Domain.Tests.Unit
 	[TestFixture]
 	public class RobotTests
 	{
-		static readonly Point ArenaSize = new Point(10, 10);
- 
+		private const int ARENA_WIDTH = 10;
+		private const int ARENA_HEIGHT = 10;
+
+		static readonly Point ArenaSize = new Point(ARENA_WIDTH, ARENA_HEIGHT);
+
 		public class WhenMovingWithinArenaBounds
 		{
 			[Test]
@@ -55,6 +59,41 @@ namespace RobotWars.Domain.Tests.Unit
 			}
 
 
+		}
+
+		public class WhenMovingOutsideOfArena
+		{
+			[Test]
+			public void MovingTooFarNorth_ShouldThrowAppropriateException()
+			{
+				Robot _robot = new Robot(0, ARENA_HEIGHT, Orientation.North, "M", ArenaSize);
+
+				Assert.Throws<ArgumentOutOfRangeException>(() => _robot.MoveForward());
+			}
+
+			[Test]
+			public void MovingTooFarEast_ShouldThrowAppropriateException()
+			{
+				Robot _robot = new Robot(ARENA_WIDTH, 0, Orientation.East, "M", ArenaSize);
+
+				Assert.Throws<ArgumentOutOfRangeException>(() => _robot.MoveForward());
+			}
+
+			[Test]
+			public void MovingTooFarSouth_ShouldThrowAppropriateException()
+			{
+				Robot _robot = new Robot(0, 0, Orientation.South, "M", ArenaSize);
+
+				Assert.Throws<ArgumentOutOfRangeException>(() => _robot.MoveForward());
+			}
+
+			[Test]
+			public void MovingTooFarWest_ShouldThrowAppropriateException()
+			{
+				Robot _robot = new Robot(0, 0, Orientation.West, "M", ArenaSize);
+
+				Assert.Throws<ArgumentOutOfRangeException>(() => _robot.MoveForward());
+			}
 		}
 	}
 }
