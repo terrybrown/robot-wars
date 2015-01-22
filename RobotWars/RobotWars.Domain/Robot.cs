@@ -8,15 +8,15 @@ namespace RobotWars.Domain
 	public class Robot
 	{
 		private Point _currentLocation;
-		private readonly RobotHeading _heading;
+		private readonly RobotOrientation _orientation;
 		private Queue<char> _preProgrammedMoves;
 		private Point _arenaSize;
 
-		public Robot(int x, int y, Orientation heading, string moves, Point arenaSize)
+		public Robot(int x, int y, Orientation orientation, string moves, Point arenaSize)
 		{
 			_currentLocation = new Point(x, y);
 			_preProgrammedMoves = new Queue<char>(moves.ToList());
-			_heading = new RobotHeading(heading);
+			_orientation = new RobotOrientation(orientation);
 			_arenaSize = arenaSize;
 		}
 
@@ -42,19 +42,20 @@ namespace RobotWars.Domain
 		public void TurnRobotLeft()
 		{
 			Console.WriteLine("Turning left");
-			_heading.TurnLeft();
+			_orientation.TurnLeft();
 		}
 
 		public void TurnRobotRight()
 		{
 			Console.WriteLine("Turning right");
-			_heading.TurnRight();
+			_orientation.TurnRight();
 		}
 
+		/// <exception cref="ArgumentOutOfRangeException">Thrown when the robot attempts to move outside of the arena</exception>
 		public void MoveForward()
 		{
-			string _currentHeading	= _heading.GetHeading();
-			Point _newLocation		= GetNewLocation(_currentLocation, _currentHeading);
+			string _currentOrientation	= _orientation.GetOrientation();
+			Point _newLocation		= GetNewLocation(_currentLocation, _currentOrientation);
 
 			VerifyNewLocationIsWithinArena(_newLocation);
 
@@ -74,9 +75,9 @@ namespace RobotWars.Domain
 
 		}
 
-		private Point GetNewLocation(Point currentLocation, string heading)
+		private Point GetNewLocation(Point currentLocation, string orientation)
 		{
-			switch (heading)
+			switch (orientation)
 			{
 				case "N":
 					currentLocation.Y += 1;
@@ -91,7 +92,7 @@ namespace RobotWars.Domain
 					currentLocation.X -= 1;
 					break;
 				default:
-					throw new ArgumentOutOfRangeException("heading");
+					throw new ArgumentOutOfRangeException("orientation");
 			}
 
 			return currentLocation;
@@ -99,7 +100,7 @@ namespace RobotWars.Domain
 
 		public override string ToString()
 		{
-			return string.Format("{0} {1} {2}", _currentLocation.X, _currentLocation.Y, _heading.GetHeading());
+			return string.Format("{0} {1} {2}", _currentLocation.X, _currentLocation.Y, _orientation.GetOrientation());
 		}
 	}
 }
