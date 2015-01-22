@@ -13,9 +13,9 @@ namespace RobotWars.Domain
 			this.arena = arena;
 		}
 
-		public void AddRobotToGame(int positionX, int positionY, Orientation heading, string moves)
+		public void AddRobotToGame(int positionX, int positionY, Orientation orientation, string moves)
 		{
-			_robots.Value.Add(new Robot(positionX, positionY, heading, moves, arena.GetArenaSize()));
+			_robots.Value.Add(new Robot(positionX, positionY, orientation, moves, arena.GetArenaSize()));
 		}
 
 		public void PlayGame()

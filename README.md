@@ -32,7 +32,7 @@ Programming test for OpenTable
 - Need to work out the role of the 'RobotWarsGame' - it feels like I should have something that maintains state of where each robot is at each time
 - What about robots moving in parallel (or at least taking each of their moves in turn - first move for all robots, second move for all robots, etc.)
 - Bounds checking on the arena is clunky - the maths on the internet to look at points falling within a polygon seems to require a longer beard than I posses (read: maths)
-- De-couple some of the elements? Robot newing up the heading object for example - feels ok in a small example, but decoupling it for testing feels better
+- De-couple some of the elements? Robot newing up the orientation object for example - feels ok in a small example, but decoupling it for testing feels better
 
 ###Thoughts
 - There is still no interaction/awareness between the robots - feels like we're missing something here (perhaps an opportunity for the overall game to play a part)
@@ -45,7 +45,7 @@ Programming test for OpenTable
 - starting to think about the overall mapping between the game, the arena and the robot
 
 ###Robot
-- starting to look at the concept of the robot's heading (as it's own encapsulated set of logic)
+- starting to look at the concept of the robot's orientation (as it's own encapsulated set of logic)
 - thinking about the set of moves a robot will perform (and indeed how)
 - at the moment, still unclear on how asking the robot to move is going to interact with the arena (the robot is aware of the size of the arena, though this feels like a dependency that I would rather avoid
 
