@@ -17,7 +17,8 @@ Programming test for OpenTable
 
 
 
-
+> **NOTE** From this point up over, we're into 'funsies' category - v0.0.2 delivers on the basic spec
+> as a developer I'd want to do a lot more with it (validation etc.)
 
 
 
