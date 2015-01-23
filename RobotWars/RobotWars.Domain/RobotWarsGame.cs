@@ -1,21 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using RobotWars.Domain.InputOutput;
 
 namespace RobotWars.Domain
 {
 	public class RobotWarsGame
 	{
-		private GameArena arena;
-		private readonly Lazy<List<Robot>> _robots = new Lazy<List<Robot>>();
+		private readonly IOutputRenderer _renderer;
+		private readonly GameArena _arena;
+		private readonly Lazy<List<Robot.Robot>> _robots = new Lazy<List<Robot.Robot>>();
  
-		public RobotWarsGame(GameArena arena)
+		public RobotWarsGame(IOutputRenderer renderer, GameArena arena)
 		{
-			this.arena = arena;
+			_renderer = renderer;
+			this._arena = arena;
 		}
 
-		public void AddRobotToGame(int positionX, int positionY, Orientation orientation, string moves)
+		public void AddRobotToGame(Robot.Robot robot)
 		{
-			_robots.Value.Add(new Robot(positionX, positionY, orientation, moves, arena.GetArenaSize()));
+			robot.SetArenaSize(_arena.GetArenaSize());
+			_robots.Value.Add(robot);
 		}
 
 		public void PlayGame()
@@ -26,10 +31,16 @@ namespace RobotWars.Domain
 			{
 				robot.PerformProgrammedMoves();
 
-				Console.WriteLine("----------------------------------------------------");
+				_renderer.RenderOutput("----------------------------------------------------");
 			}
+		}
 
-			Console.ReadKey();
+		public void GetFinalPositions()
+		{
+			foreach (var robot in _robots.Value)
+			{
+				_renderer.RenderOutput(robot.ToString());
+			}
 		}
 	}
 }

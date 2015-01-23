@@ -6,23 +6,40 @@ Programming test for OpenTable
 
 - Next branches
 	- each robot taking single turn each (and 'MakeNextMove' being put in)
-	- validation on robot 
 	- arena/game interaction, and tracking the location of the robots on the arena
-	- console input
 
 
 
 
-
-
-
-
-
-
-
-
-> **NOTE** From this point up over, we're into 'funsies' category - v0.0.2 delivers on the basic spec
+> **NOTE** From this point up over, we're into 'funsies' category - v0.0.3 delivers on the basic spec
 > as a developer I'd want to do a lot more with it (validation etc.)
+
+
+
+##v0.0.3 - First version complete as per spec
+- Console input now supported
+- Validation against inputs in place
+- Abstraction of some of the domain to better deliver SRP and keep the concerns simple
+
+
+####TODO
+- Use the IInputRenderer, IOutputRenderer in the DataCollection classes
+- Investigate ways we can make the robot less dependent upon the knowledge of the arena bounds 
+- Make each robot take their turns 'in turn' rather than a robot go through it's full set of moves
+- Need to clarify what the role of the game is - I think it's a little superfluous at the moment
+
+
+####FUTURE
+- Robots running in parallel 
+- Non-zero based grids
+- Full support of non-rectangular arena's (would need solid point checking against inside/outside of polygon)
+- Collision detection/awareness between the robots
+- Events based notifications
+- Z axis? ;)
+
+
+
+
 
 
 
