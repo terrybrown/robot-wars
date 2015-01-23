@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using RobotWars.Domain.Robot;
 
 namespace RobotWars.Domain.Tests.Unit
 {

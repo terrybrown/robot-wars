@@ -1,30 +1,43 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
+using RobotWars.Domain.InputOutput;
 
-namespace RobotWars.Domain
+namespace RobotWars.Domain.Robot
 {
 	public class Robot
 	{
-		private Point _currentLocation;
+		private readonly IOutputRenderer _renderer;
 		private readonly RobotOrientation _orientation;
-		private Queue<char> _preProgrammedMoves;
+		private readonly RobotMoves _robotMoves;
+		private readonly RobotPosition _robotPosition;
+
 		private Point _arenaSize;
 
-		public Robot(int x, int y, Orientation orientation, string moves, Point arenaSize)
+		internal Robot(IOutputRenderer renderer, int x, int y, Orientation orientation, string preProgrammedMoves, Point arenaSize) 
+			: this(renderer, new Point(x, y), orientation, preProgrammedMoves)
 		{
-			_currentLocation = new Point(x, y);
-			_preProgrammedMoves = new Queue<char>(moves.ToList());
-			_orientation = new RobotOrientation(orientation);
+			_arenaSize = arenaSize;
+		}
+
+		public Robot(IOutputRenderer renderer, Point positionOnArena, Orientation orientation, string preProgrammedMoves)
+		{
+			_renderer		= renderer;
+			_robotPosition	= new RobotPosition(positionOnArena);
+			_orientation	= new RobotOrientation(orientation);
+			_robotMoves		= new RobotMoves(preProgrammedMoves);
+		}
+
+		internal void SetArenaSize(Point arenaSize)
+		{
 			_arenaSize = arenaSize;
 		}
 
 		public void PerformProgrammedMoves()
 		{
-			while (_preProgrammedMoves.Count > 0)
+			char? _nextMove = _robotMoves.GetNextMove();
+			while (_nextMove != null)
 			{
-				switch (_preProgrammedMoves.Dequeue())
+				switch (_nextMove)
 				{
 					case 'L':
 						TurnRobotLeft();
@@ -36,18 +49,20 @@ namespace RobotWars.Domain
 						MoveForward();
 						break;
 				}
+
+				_nextMove = _robotMoves.GetNextMove();
 			}
 		}
 
 		public void TurnRobotLeft()
 		{
-			Console.WriteLine("Turning left");
+			_renderer.RenderDebug("Turning left");
 			_orientation.TurnLeft();
 		}
 
 		public void TurnRobotRight()
 		{
-			Console.WriteLine("Turning right");
+			_renderer.RenderDebug("Turning right");
 			_orientation.TurnRight();
 		}
 
@@ -55,13 +70,13 @@ namespace RobotWars.Domain
 		public void MoveForward()
 		{
 			string _currentOrientation	= _orientation.GetOrientation();
-			Point _newLocation		= GetNewLocation(_currentLocation, _currentOrientation);
+			Point _newLocation		= GetNewLocation(_robotPosition.GetCurrentLocation(), _currentOrientation);
 
 			VerifyNewLocationIsWithinArena(_newLocation);
 
-			_currentLocation = _newLocation;
+			_robotPosition.SetCurrentLocation(_newLocation);
 
-			Console.WriteLine("Moving forward to: " + this.ToString());
+			_renderer.RenderDebug("Moving forward to: " + ToString());
 		}
 
 		/// <exception cref="ArgumentOutOfRangeException"></exception>
@@ -100,7 +115,7 @@ namespace RobotWars.Domain
 
 		public override string ToString()
 		{
-			return string.Format("{0} {1} {2}", _currentLocation.X, _currentLocation.Y, _orientation.GetOrientation());
+			return string.Format("{0} {1} {2}", _robotPosition.X, _robotPosition.Y, _orientation.GetOrientation());
 		}
 	}
 }
