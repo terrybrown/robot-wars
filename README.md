@@ -20,13 +20,13 @@ Programming test for OpenTable
 - Console input now supported
 - Validation against inputs in place
 - Abstraction of some of the domain to better deliver SRP and keep the concerns simple
-
+- Arena is now a more fixed 'bottom left', 'top right' approach than what I'd had up until here
 
 ####TODO
 - Use the IInputRenderer, IOutputRenderer in the DataCollection classes
 - Investigate ways we can make the robot less dependent upon the knowledge of the arena bounds 
 - Make each robot take their turns 'in turn' rather than a robot go through it's full set of moves
-- Need to clarify what the role of the game is - I think it's a little superfluous at the moment
+- Need to clarify what the role of the RobotWarsGame is - I think it's a little superfluous at the moment
 
 
 ####FUTURE
