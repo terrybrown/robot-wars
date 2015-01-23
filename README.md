@@ -4,7 +4,11 @@ Programming test for OpenTable
 
 
 
-
+- Next branches
+	- each robot taking single turn each (and 'MakeNextMove' being put in)
+	- validation on robot 
+	- arena/game interaction, and tracking the location of the robots on the arena
+	- console input
 
 
 
