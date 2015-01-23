@@ -9,15 +9,15 @@ namespace RobotWars.Domain.Tests.Unit
 			return string.Empty;
 		}
 
-		public void RenderOutput(string output)
-		{
-		}
-
 		public void RenderOutput(string output, params object[] args)
 		{
 		}
 
-		public void RenderDebug(string output)
+		public void RenderError(string output, params object[] args)
+		{
+		}
+
+		public void RenderDebug(string output, params object[] args)
 		{
 		}
 	}

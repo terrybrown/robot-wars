@@ -17,9 +17,10 @@ namespace RobotWars.Domain
 			this._arena = arena;
 		}
 
+		/// <exception cref="ArgumentOutOfRangeException">Thrown when the robot is outside of the arena</exception>
 		public void AddRobotToGame(Robot.Robot robot)
 		{
-			robot.SetArenaSize(_arena.GetArenaSize());
+			robot.SetArenaSize(_arena.GetArenaBottomLeft(), _arena.GetArenaTopRight());
 			_robots.Value.Add(robot);
 		}
 
