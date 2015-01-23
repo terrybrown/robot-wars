@@ -17,7 +17,7 @@ namespace RobotWars.Application
 	{
 		static void Main(string[] args)
 		{
-			ConsoleRenderer _renderer = new ConsoleRenderer(Settings.Default.RenderDebugOutput);
+			var _renderer = new ConsoleRenderer(Settings.Default.RenderDebugOutput);
 
 			_renderer.RenderOutput("Robot Wars ---------------------------------------");
 			_renderer.RenderOutput("Verbose output is set to '{0}' - you can change it in app.config", Settings.Default.RenderDebugOutput);
@@ -45,7 +45,6 @@ namespace RobotWars.Application
 			}
 
 			_game.PlayGame();
-
 
 			Console.ForegroundColor = ConsoleColor.Cyan;
 			_renderer.RenderOutput("Final Positions ------------------------------------------------");
@@ -75,7 +74,7 @@ namespace RobotWars.Application
 													"Please enter the robots pre-programmed moves as a collection of L M R:",
 													"Your robot doesn't have any valid moves - valid inputs are L, M and R");
 
-			Robot _robot = new Robot(renderer, _positionOnArena, _robotOrientation, _preProgrammedMoves);
+			var _robot = new Robot(renderer, _positionOnArena, _robotOrientation, _preProgrammedMoves);
 
 			try
 			{

@@ -42,7 +42,7 @@ namespace RobotWars.Domain.Robot
 			return this;
 		}
 
-		public string GetOrientation()
+		public string GetOrientationAsSingleLetterCompassPoint()
 		{
 			return _currentOrientation.ToString().Substring(0, 1);	// better way than this, quick fix for now
 		}
@@ -78,6 +78,11 @@ namespace RobotWars.Domain.Robot
 			orientation = _parsedOrientation;
 
 			return ValidOrientations.Any( x => x == _parsedOrientation);
+		}
+
+		public override string ToString()
+		{
+			return _currentOrientation.ToString();
 		}
 	}
 }

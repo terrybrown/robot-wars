@@ -9,7 +9,7 @@ namespace RobotWars.Domain.Tests.Unit.Robot
 	{
 		private const int ARENA_WIDTH = 10;
 		private const int ARENA_HEIGHT = 10;
-		private static readonly NullRenderer _renderer = new NullRenderer();
+		private static readonly NullRenderer Renderer = new NullRenderer();
 
 		static readonly Point ArenaBottomLeft = new Point(0, 0);
 		static readonly Point ArenaTopRight = new Point(ARENA_WIDTH, ARENA_HEIGHT);
@@ -21,7 +21,7 @@ namespace RobotWars.Domain.Tests.Unit.Robot
 			{
 				const string EXPECTED_END_POINT = "3 4 N";
 
-				var _robot = new Domain.Robot.Robot(_renderer, new Point(3, 3), Orientation.North, "M");
+				var _robot = new Domain.Robot.Robot(Renderer, new Point(3, 3), Orientation.North, "M");
 				_robot.SetArenaSize(ArenaBottomLeft, ArenaTopRight);
 
 				_robot.MoveForward();
@@ -34,7 +34,7 @@ namespace RobotWars.Domain.Tests.Unit.Robot
 			{
 				const string EXPECTED_END_POINT = "4 3 E";
 
-				var _robot = new Domain.Robot.Robot(_renderer, new Point(3, 3), Orientation.East, "M");
+				var _robot = new Domain.Robot.Robot(Renderer, new Point(3, 3), Orientation.East, "M");
 				_robot.SetArenaSize(ArenaBottomLeft, ArenaTopRight);
 
 				_robot.MoveForward();
@@ -47,7 +47,7 @@ namespace RobotWars.Domain.Tests.Unit.Robot
 			{
 				const string EXPECTED_END_POINT = "3 2 S";
 
-				var _robot = new Domain.Robot.Robot(_renderer, new Point(3, 3), Orientation.South, "M");
+				var _robot = new Domain.Robot.Robot(Renderer, new Point(3, 3), Orientation.South, "M");
 				_robot.SetArenaSize(ArenaBottomLeft, ArenaTopRight);
 
 				_robot.MoveForward();
@@ -60,7 +60,7 @@ namespace RobotWars.Domain.Tests.Unit.Robot
 			{
 				const string EXPECTED_END_POINT = "2 3 W";
 
-				var _robot = new Domain.Robot.Robot(_renderer, new Point(3, 3), Orientation.West, "M");
+				var _robot = new Domain.Robot.Robot(Renderer, new Point(3, 3), Orientation.West, "M");
 				_robot.SetArenaSize(ArenaBottomLeft, ArenaTopRight);
 
 				_robot.MoveForward();
@@ -76,7 +76,7 @@ namespace RobotWars.Domain.Tests.Unit.Robot
 			[Test]
 			public void MovingTooFarNorth_ShouldThrowAppropriateException()
 			{
-				var _robot = new Domain.Robot.Robot(_renderer, new Point(0, ARENA_HEIGHT), Orientation.North, "M");
+				var _robot = new Domain.Robot.Robot(Renderer, new Point(0, ARENA_HEIGHT), Orientation.North, "M");
 				_robot.SetArenaSize(ArenaBottomLeft, ArenaTopRight);
 
 
@@ -86,9 +86,8 @@ namespace RobotWars.Domain.Tests.Unit.Robot
 			[Test]
 			public void MovingTooFarEast_ShouldThrowAppropriateException()
 			{
-				var _robot = new Domain.Robot.Robot(_renderer, new Point(ARENA_WIDTH, 0), Orientation.East, "M");
+				var _robot = new Domain.Robot.Robot(Renderer, new Point(ARENA_WIDTH, 0), Orientation.East, "M");
 				_robot.SetArenaSize(ArenaBottomLeft, ArenaTopRight);
-
 
 				Assert.Throws<ArgumentOutOfRangeException>(() => _robot.MoveForward());
 			}
@@ -96,7 +95,7 @@ namespace RobotWars.Domain.Tests.Unit.Robot
 			[Test]
 			public void MovingTooFarSouth_ShouldThrowAppropriateException()
 			{
-				var _robot = new Domain.Robot.Robot(_renderer, new Point(0, 0), Orientation.South, "M");
+				var _robot = new Domain.Robot.Robot(Renderer, new Point(0, 0), Orientation.South, "M");
 				_robot.SetArenaSize(ArenaBottomLeft, ArenaTopRight);
 
 				Assert.Throws<ArgumentOutOfRangeException>(() => _robot.MoveForward());
@@ -105,10 +104,21 @@ namespace RobotWars.Domain.Tests.Unit.Robot
 			[Test]
 			public void MovingTooFarWest_ShouldThrowAppropriateException()
 			{
-				var _robot = new Domain.Robot.Robot(_renderer, new Point(0, 0), Orientation.West, "M");
+				var _robot = new Domain.Robot.Robot(Renderer, new Point(0, 0), Orientation.West, "M");
 				_robot.SetArenaSize(ArenaBottomLeft, ArenaTopRight);
 
 				Assert.Throws<ArgumentOutOfRangeException>(() => _robot.MoveForward());
+			}
+		}
+
+		public class WhenAttemptingToMoveWithoutSettingTheArena
+		{
+			[Test]
+			public void AnyMovement_ShouldThrowAppropriateException()
+			{
+				var _robot = new Domain.Robot.Robot(Renderer, new Point(0, ARENA_HEIGHT), Orientation.North, "M");
+
+				Assert.Throws<ArgumentNullException>(() => _robot.MoveForward());
 			}
 		}
 	}

@@ -18,7 +18,7 @@ namespace RobotWars.Domain.Tests.Unit
 			{
 				var _orientation = new RobotOrientation(NORTH);
 
-				Assert.AreEqual(_orientation.GetOrientation(), "N");
+				Assert.AreEqual(_orientation.GetOrientationAsSingleLetterCompassPoint(), "N");
 			}
 
 			[Test]
@@ -26,7 +26,7 @@ namespace RobotWars.Domain.Tests.Unit
 			{
 				var _orientation = new RobotOrientation(SOUTH);
 
-				Assert.AreEqual("S", _orientation.GetOrientation());
+				Assert.AreEqual("S", _orientation.GetOrientationAsSingleLetterCompassPoint());
 			}
 		}
 
@@ -39,7 +39,7 @@ namespace RobotWars.Domain.Tests.Unit
 
 				_orientation.TurnLeft();
 
-				Assert.AreEqual("W", _orientation.GetOrientation());
+				Assert.AreEqual("W", _orientation.GetOrientationAsSingleLetterCompassPoint());
 			}
 
 			[Test]
@@ -49,7 +49,7 @@ namespace RobotWars.Domain.Tests.Unit
 
 				_orientation.TurnLeft();
 
-				Assert.AreEqual("S", _orientation.GetOrientation());
+				Assert.AreEqual("S", _orientation.GetOrientationAsSingleLetterCompassPoint());
 			}
 
 			[Test]
@@ -59,7 +59,7 @@ namespace RobotWars.Domain.Tests.Unit
 
 				_orientation.TurnLeft();
 
-				Assert.AreEqual("E", _orientation.GetOrientation());
+				Assert.AreEqual("E", _orientation.GetOrientationAsSingleLetterCompassPoint());
 			}
 
 			[Test]
@@ -69,7 +69,7 @@ namespace RobotWars.Domain.Tests.Unit
 
 				_orientation.TurnLeft();
 
-				Assert.AreEqual("N", _orientation.GetOrientation());
+				Assert.AreEqual("N", _orientation.GetOrientationAsSingleLetterCompassPoint());
 			}
 
 			[Test]
@@ -79,7 +79,7 @@ namespace RobotWars.Domain.Tests.Unit
 
 				_orientation.TurnLeft().TurnLeft();
 
-				Assert.AreEqual("W", _orientation.GetOrientation());
+				Assert.AreEqual("W", _orientation.GetOrientationAsSingleLetterCompassPoint());
 			}
 
 			[Test]
@@ -89,7 +89,7 @@ namespace RobotWars.Domain.Tests.Unit
 
 				_orientation.TurnLeft().TurnLeft().TurnLeft();
 
-				Assert.AreEqual("S", _orientation.GetOrientation());
+				Assert.AreEqual("S", _orientation.GetOrientationAsSingleLetterCompassPoint());
 			}
 
 			[Test]
@@ -99,7 +99,7 @@ namespace RobotWars.Domain.Tests.Unit
 
 				_orientation.TurnLeft().TurnLeft().TurnLeft().TurnLeft();
 
-				Assert.AreEqual("E", _orientation.GetOrientation());
+				Assert.AreEqual("E", _orientation.GetOrientationAsSingleLetterCompassPoint());
 			}
 
 		}
@@ -113,7 +113,7 @@ namespace RobotWars.Domain.Tests.Unit
 
 				_orientation.TurnRight();
 
-				Assert.AreEqual("E", _orientation.GetOrientation());
+				Assert.AreEqual("E", _orientation.GetOrientationAsSingleLetterCompassPoint());
 			}
 
 			[Test]
@@ -123,7 +123,7 @@ namespace RobotWars.Domain.Tests.Unit
 
 				_orientation.TurnRight();
 
-				Assert.AreEqual("N", _orientation.GetOrientation());
+				Assert.AreEqual("N", _orientation.GetOrientationAsSingleLetterCompassPoint());
 			}
 
 			[Test]
@@ -133,7 +133,7 @@ namespace RobotWars.Domain.Tests.Unit
 
 				_orientation.TurnRight();
 
-				Assert.AreEqual("W", _orientation.GetOrientation());
+				Assert.AreEqual("W", _orientation.GetOrientationAsSingleLetterCompassPoint());
 			}
 
 			[Test]
@@ -143,7 +143,7 @@ namespace RobotWars.Domain.Tests.Unit
 
 				_orientation.TurnRight();
 
-				Assert.AreEqual("S", _orientation.GetOrientation());
+				Assert.AreEqual("S", _orientation.GetOrientationAsSingleLetterCompassPoint());
 			}
 
 			[Test]
@@ -153,7 +153,7 @@ namespace RobotWars.Domain.Tests.Unit
 
 				_orientation.TurnRight().TurnRight();
 
-				Assert.AreEqual("W", _orientation.GetOrientation());
+				Assert.AreEqual("W", _orientation.GetOrientationAsSingleLetterCompassPoint());
 			}
 
 			[Test]
@@ -163,7 +163,7 @@ namespace RobotWars.Domain.Tests.Unit
 
 				_orientation.TurnRight().TurnRight().TurnRight();
 
-				Assert.AreEqual("N", _orientation.GetOrientation());
+				Assert.AreEqual("N", _orientation.GetOrientationAsSingleLetterCompassPoint());
 			}
 
 			[Test]
@@ -173,7 +173,7 @@ namespace RobotWars.Domain.Tests.Unit
 
 				_orientation.TurnRight().TurnRight().TurnRight().TurnRight();
 
-				Assert.AreEqual("E", _orientation.GetOrientation());
+				Assert.AreEqual("E", _orientation.GetOrientationAsSingleLetterCompassPoint());
 			}
 
 		}
