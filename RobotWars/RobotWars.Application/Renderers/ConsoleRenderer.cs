@@ -17,15 +17,17 @@ namespace RobotWars.Application.Renderers
 			Console.WriteLine(output, args);
 		}
 
-		public void RenderOutput(string output)
+		public void RenderError(string output, params object[] args)
 		{
-			Console.WriteLine(output);
+			Console.ForegroundColor = ConsoleColor.Red;
+			Console.WriteLine(output, args);
+			Console.ResetColor();
 		}
 
-		public void RenderDebug(string output)
+		public void RenderDebug(string output, params object[] args)
 		{
 			if (_renderDebugOutput)
-				Console.WriteLine(output);
+				Console.WriteLine(output, args);
 		}
 
 		public string ReadInput()

@@ -11,13 +11,8 @@ namespace RobotWars.Domain.Robot
 		private readonly RobotMoves _robotMoves;
 		private readonly RobotPosition _robotPosition;
 
-		private Point _arenaSize;
-
-		internal Robot(IOutputRenderer renderer, int x, int y, Orientation orientation, string preProgrammedMoves, Point arenaSize) 
-			: this(renderer, new Point(x, y), orientation, preProgrammedMoves)
-		{
-			_arenaSize = arenaSize;
-		}
+		private Point? _arenaBottomLeft;
+		private Point? _arenaTopRight;
 
 		public Robot(IOutputRenderer renderer, Point positionOnArena, Orientation orientation, string preProgrammedMoves)
 		{
@@ -27,9 +22,13 @@ namespace RobotWars.Domain.Robot
 			_robotMoves		= new RobotMoves(preProgrammedMoves);
 		}
 
-		internal void SetArenaSize(Point arenaSize)
+		/// <exception cref="ArgumentOutOfRangeException">Thrown when the robot is outside of the arena</exception>
+		internal void SetArenaSize(Point arenaBottomLeft, Point arenaTopRight)
 		{
-			_arenaSize = arenaSize;
+			_arenaBottomLeft = arenaBottomLeft;
+			_arenaTopRight = arenaTopRight;
+
+			VerifyLocationIsWithinArena(_robotPosition.GetCurrentLocation());
 		}
 
 		public void PerformProgrammedMoves()
@@ -46,7 +45,16 @@ namespace RobotWars.Domain.Robot
 						TurnRobotRight();
 						break;
 					case 'M':
-						MoveForward();
+						try
+						{
+							MoveForward();
+						}
+						catch (ArgumentOutOfRangeException)
+						{
+							_renderer.RenderError("Attempt to move to a location outside of the arena - FROM: {0} DIRECTION: {1}", 
+													_robotPosition.GetCurrentLocation(), 
+													_orientation.ToString());
+						}
 						break;
 				}
 
@@ -66,13 +74,17 @@ namespace RobotWars.Domain.Robot
 			_orientation.TurnRight();
 		}
 
+		/// <exception cref="ArgumentNullException">Thrown when the arena hasn't been setup</exception>
 		/// <exception cref="ArgumentOutOfRangeException">Thrown when the robot attempts to move outside of the arena</exception>
 		public void MoveForward()
 		{
-			string _currentOrientation	= _orientation.GetOrientation();
-			Point _newLocation		= GetNewLocation(_robotPosition.GetCurrentLocation(), _currentOrientation);
+			if (_arenaBottomLeft == null || _arenaTopRight == null) 
+				throw new ArgumentNullException("Arena not setup");
 
-			VerifyNewLocationIsWithinArena(_newLocation);
+			string _currentOrientation	= _orientation.GetOrientationAsSingleLetterCompassPoint();
+			Point _newLocation			= GetNewLocation(_robotPosition.GetCurrentLocation(), _currentOrientation);
+
+			VerifyLocationIsWithinArena(_newLocation);
 
 			_robotPosition.SetCurrentLocation(_newLocation);
 
@@ -80,10 +92,10 @@ namespace RobotWars.Domain.Robot
 		}
 
 		/// <exception cref="ArgumentOutOfRangeException"></exception>
-		private void VerifyNewLocationIsWithinArena(Point newLocation)
+		private void VerifyLocationIsWithinArena(Point newLocation)
 		{
-			if (newLocation.X < 0 || newLocation.X > _arenaSize.X ||
-				newLocation.Y < 0 || newLocation.Y > _arenaSize.Y)
+			if (newLocation.X < _arenaBottomLeft.Value.X || newLocation.X > _arenaTopRight.Value.X ||
+				newLocation.Y < _arenaBottomLeft.Value.Y || newLocation.Y > _arenaTopRight.Value.Y)
 			{
 				throw new ArgumentOutOfRangeException("newLocation", "The new location would take this robot outside of the arena");
 			}
@@ -115,7 +127,7 @@ namespace RobotWars.Domain.Robot
 
 		public override string ToString()
 		{
-			return string.Format("{0} {1} {2}", _robotPosition.X, _robotPosition.Y, _orientation.GetOrientation());
+			return string.Format("{0} {1} {2}", _robotPosition.X, _robotPosition.Y, _orientation.GetOrientationAsSingleLetterCompassPoint());
 		}
 	}
 }

@@ -77,7 +77,14 @@ namespace RobotWars.Application
 
 			Robot _robot = new Robot(renderer, _positionOnArena, _robotOrientation, _preProgrammedMoves);
 
-			game.AddRobotToGame(_robot);
+			try
+			{
+				game.AddRobotToGame(_robot);
+			}
+			catch (ArgumentOutOfRangeException)
+			{
+				renderer.RenderError("You have attempted to put the robot outside of the arena - unable to add the robot");
+			}
 		}
 	}
 }

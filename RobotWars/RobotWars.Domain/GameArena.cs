@@ -4,18 +4,22 @@ namespace RobotWars.Domain
 {
 	public class GameArena
 	{
-		private Region _grid;
+		private readonly Point _bottomLeftPosition = new Point(0,0);
+		private readonly Point _topRightPosition;
 
 		public GameArena(int width, int height)
 		{
-			_grid = new Region(new Rectangle(0, 0, width, height));
+			_topRightPosition = new Point(width, height);	
 		}
 
-		public Point GetArenaSize()
+		public Point GetArenaBottomLeft()
 		{
-			//return gridSize;
+			return _bottomLeftPosition;
+		}
 
-			return new Point(10, 10);
+		public Point GetArenaTopRight()
+		{
+			return _topRightPosition;
 		}
 	}
 }
