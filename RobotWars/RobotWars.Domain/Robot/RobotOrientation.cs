@@ -1,23 +1,28 @@
 ﻿using System;
 using System.Linq;
+using RobotWars.Domain.InputOutput;
 
 namespace RobotWars.Domain.Robot
 {
 	public class RobotOrientation
 	{
+		private readonly IOutputRenderer _renderer;
 		private Orientation _currentOrientation;
 		private static readonly Orientation[] ValidOrientations = { Orientation.North, 
 																	Orientation.East, 
 																	Orientation.South,
 																	Orientation.West };
 
-		public RobotOrientation(Orientation orientation = Orientation.North)
+		public RobotOrientation(IOutputRenderer renderer, Orientation orientation = Orientation.North)
 		{
+			_renderer = renderer;
 			_currentOrientation = orientation;
 		}
 
 		public RobotOrientation TurnLeft()
 		{
+			_renderer.RenderDebug("Turning left");
+
 			int _nextIndex = Array.IndexOf(ValidOrientations, _currentOrientation) - 1;
 			if (_nextIndex < 0)
 			{
@@ -31,6 +36,8 @@ namespace RobotWars.Domain.Robot
 
 		public RobotOrientation TurnRight()
 		{
+			_renderer.RenderDebug("Turning right");
+	
 			int _nextIndex = Array.IndexOf(ValidOrientations, _currentOrientation) + 1;
 			if (_nextIndex > ValidOrientations.Length -1)
 			{

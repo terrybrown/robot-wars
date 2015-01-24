@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using RobotWars.Application.Properties;
 using RobotWars.Application.Renderers;
 using RobotWars.Domain;
+using RobotWars.Domain.Contracts;
 using RobotWars.Domain.InputOutput;
 using RobotWars.Domain.Robot;
 using RobotWars.Domain.Validation;
@@ -74,7 +75,7 @@ namespace RobotWars.Application
 													"Please enter the robots pre-programmed moves as a collection of L M R:",
 													"Your robot doesn't have any valid moves - valid inputs are L, M and R");
 
-			var _robot = new Robot(renderer, _positionOnArena, _robotOrientation, _preProgrammedMoves);
+			IRobot _robot = new Robot(renderer, _positionOnArena, _robotOrientation, _preProgrammedMoves);
 
 			try
 			{

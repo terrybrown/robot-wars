@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using RobotWars.Domain.Contracts;
 using RobotWars.Domain.InputOutput;
 
 namespace RobotWars.Domain
@@ -9,7 +10,7 @@ namespace RobotWars.Domain
 	{
 		private readonly IOutputRenderer _renderer;
 		private readonly GameArena _arena;
-		private readonly Lazy<List<Robot.Robot>> _robots = new Lazy<List<Robot.Robot>>();
+		private readonly Lazy<List<IRobot>> _robots = new Lazy<List<IRobot>>();
  
 		public RobotWarsGame(IOutputRenderer renderer, GameArena arena)
 		{
@@ -18,7 +19,7 @@ namespace RobotWars.Domain
 		}
 
 		/// <exception cref="ArgumentOutOfRangeException">Thrown when the robot is outside of the arena</exception>
-		public void AddRobotToGame(Robot.Robot robot)
+		public void AddRobotToGame(IRobot robot)
 		{
 			robot.SetArenaSize(_arena.GetArenaBottomLeft(), _arena.GetArenaTopRight());
 			_robots.Value.Add(robot);

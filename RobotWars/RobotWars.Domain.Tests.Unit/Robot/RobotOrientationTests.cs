@@ -10,13 +10,14 @@ namespace RobotWars.Domain.Tests.Unit
 		private const Orientation EAST	= Orientation.East;
 		private const Orientation SOUTH = Orientation.South;
 		private const Orientation WEST	= Orientation.West;
+		private static readonly NullRenderer Renderer = new NullRenderer();
 
 		public class WithoutAnyTurnCommands
 		{
 			[Test]
 			public void AndInitialOrientationOfNorth_GetOrientationShouldReturnNorth()
 			{
-				var _orientation = new RobotOrientation(NORTH);
+				var _orientation = new RobotOrientation(Renderer, NORTH);
 
 				Assert.AreEqual(_orientation.GetOrientationAsSingleLetterCompassPoint(), "N");
 			}
@@ -24,7 +25,7 @@ namespace RobotWars.Domain.Tests.Unit
 			[Test]
 			public void AndInitialOrientationOfSouth_GetOrientationShouldReturnSouth()
 			{
-				var _orientation = new RobotOrientation(SOUTH);
+				var _orientation = new RobotOrientation(Renderer, SOUTH);
 
 				Assert.AreEqual("S", _orientation.GetOrientationAsSingleLetterCompassPoint());
 			}
@@ -35,7 +36,7 @@ namespace RobotWars.Domain.Tests.Unit
 			[Test]
 			public void WhenInitialOrientationIsNorth_GetOrientationWillReturnWest()
 			{
-				var _orientation = new RobotOrientation(NORTH);
+				var _orientation = new RobotOrientation(Renderer, NORTH);
 
 				_orientation.TurnLeft();
 
@@ -45,7 +46,7 @@ namespace RobotWars.Domain.Tests.Unit
 			[Test]
 			public void WhenInitialOrientationIsWest_GetOrientationWillReturnSouth()
 			{
-				var _orientation = new RobotOrientation(WEST);
+				var _orientation = new RobotOrientation(Renderer, WEST);
 
 				_orientation.TurnLeft();
 
@@ -55,7 +56,7 @@ namespace RobotWars.Domain.Tests.Unit
 			[Test]
 			public void WhenInitialOrientationIsSouth_GetOrientationWillReturnEast()
 			{
-				var _orientation = new RobotOrientation(SOUTH);
+				var _orientation = new RobotOrientation(Renderer, SOUTH);
 
 				_orientation.TurnLeft();
 
@@ -65,7 +66,7 @@ namespace RobotWars.Domain.Tests.Unit
 			[Test]
 			public void WhenInitialOrientationIsEast_GetOrientationWillReturnNorth()
 			{
-				var _orientation = new RobotOrientation(EAST);
+				var _orientation = new RobotOrientation(Renderer, EAST);
 
 				_orientation.TurnLeft();
 
@@ -75,7 +76,7 @@ namespace RobotWars.Domain.Tests.Unit
 			[Test]
 			public void WhenTurningTwiceAndInitialOrientationIsEast_GetOrientationWillReturnWest()
 			{
-				var _orientation = new RobotOrientation(EAST);
+				var _orientation = new RobotOrientation(Renderer, EAST);
 
 				_orientation.TurnLeft().TurnLeft();
 
@@ -85,7 +86,7 @@ namespace RobotWars.Domain.Tests.Unit
 			[Test]
 			public void WhenTurningThreeTimesAndInitialOrientationIsEast_GetOrientationWillReturnSouth()
 			{
-				var _orientation = new RobotOrientation(EAST);
+				var _orientation = new RobotOrientation(Renderer, EAST);
 
 				_orientation.TurnLeft().TurnLeft().TurnLeft();
 
@@ -95,7 +96,7 @@ namespace RobotWars.Domain.Tests.Unit
 			[Test]
 			public void WhenTurningFourTimesAndInitialOrientationIsEast_GetOrientationWillReturnEast()
 			{
-				var _orientation = new RobotOrientation(EAST);
+				var _orientation = new RobotOrientation(Renderer, EAST);
 
 				_orientation.TurnLeft().TurnLeft().TurnLeft().TurnLeft();
 
@@ -109,7 +110,7 @@ namespace RobotWars.Domain.Tests.Unit
 			[Test]
 			public void WhenInitialOrientationIsNorth_GetOrientationWillReturnEast()
 			{
-				var _orientation = new RobotOrientation(NORTH);
+				var _orientation = new RobotOrientation(Renderer, NORTH);
 
 				_orientation.TurnRight();
 
@@ -119,7 +120,7 @@ namespace RobotWars.Domain.Tests.Unit
 			[Test]
 			public void WhenInitialOrientationIsWest_GetOrientationWillReturnNorth()
 			{
-				var _orientation = new RobotOrientation(WEST);
+				var _orientation = new RobotOrientation(Renderer, WEST);
 
 				_orientation.TurnRight();
 
@@ -129,7 +130,7 @@ namespace RobotWars.Domain.Tests.Unit
 			[Test]
 			public void WhenInitialOrientationIsSouth_GetOrientationWillReturnWest()
 			{
-				var _orientation = new RobotOrientation(SOUTH);
+				var _orientation = new RobotOrientation(Renderer, SOUTH);
 
 				_orientation.TurnRight();
 
@@ -139,7 +140,7 @@ namespace RobotWars.Domain.Tests.Unit
 			[Test]
 			public void WhenInitialOrientationIsEast_GetOrientationWillReturnSouth()
 			{
-				var _orientation = new RobotOrientation(EAST);
+				var _orientation = new RobotOrientation(Renderer, EAST);
 
 				_orientation.TurnRight();
 
@@ -149,7 +150,7 @@ namespace RobotWars.Domain.Tests.Unit
 			[Test]
 			public void WhenTurningTwiceAndInitialOrientationIsEast_GetOrientationWillReturnWest()
 			{
-				var _orientation = new RobotOrientation(EAST);
+				var _orientation = new RobotOrientation(Renderer, EAST);
 
 				_orientation.TurnRight().TurnRight();
 
@@ -159,7 +160,7 @@ namespace RobotWars.Domain.Tests.Unit
 			[Test]
 			public void WhenTurningThreeTimesAndInitialOrientationIsEast_GetOrientationWillReturnNorth()
 			{
-				var _orientation = new RobotOrientation(EAST);
+				var _orientation = new RobotOrientation(Renderer, EAST);
 
 				_orientation.TurnRight().TurnRight().TurnRight();
 
@@ -169,7 +170,7 @@ namespace RobotWars.Domain.Tests.Unit
 			[Test]
 			public void WhenTurningFourTimesAndInitialOrientationIsEast_GetOrientationWillReturnEast()
 			{
-				var _orientation = new RobotOrientation(EAST);
+				var _orientation = new RobotOrientation(Renderer, EAST);
 
 				_orientation.TurnRight().TurnRight().TurnRight().TurnRight();
 

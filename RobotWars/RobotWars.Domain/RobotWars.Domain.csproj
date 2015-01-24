@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IRobot.cs" />
     <Compile Include="GameArena.cs" />
     <Compile Include="InputOutput\IInputRenderer.cs" />
     <Compile Include="InputOutput\IOutputRenderer.cs" />
