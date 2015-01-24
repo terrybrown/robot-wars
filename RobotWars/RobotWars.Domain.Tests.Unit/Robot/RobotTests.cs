@@ -7,15 +7,55 @@ using RobotWars.Domain.InputOutput;
 namespace RobotWars.Domain.Tests.Unit.Robot
 {
 	[TestFixture]
-	public class RobotMovementTests
+	public class RobotTests
 	{
-		private const int ARENA_WIDTH = 10;
-		private const int ARENA_HEIGHT = 10;
+		private const int ARENA_WIDTH = 5;
+		private const int ARENA_HEIGHT = 5;
 		private static Mock<IOutputRenderer> renderer;
 
 		static readonly Point ArenaBottomLeft = new Point(0, 0);
 		static readonly Point ArenaTopRight = new Point(ARENA_WIDTH, ARENA_HEIGHT);
 
+		public class WhenGivenASpecOnAPieceOfPaper
+		{
+			[SetUp]
+			public void BeforeEachTest()
+			{
+				renderer = new Mock<IOutputRenderer>();
+			}
+
+			[TearDown]
+			public void AfterEachTest()
+			{
+				renderer = null;
+			}
+
+			[Test]
+			public void PreProgrammedRobotOne_ShouldArriveAtItsDestinationSafely()
+			{
+				const string EXPECTED_END_POINT = "1 3 N";
+
+				var _robot = new Domain.Robot.Robot(renderer.Object, new Point(1, 2), Orientation.North, "LMLMLMLMM");
+				_robot.SetArenaSize(ArenaBottomLeft, ArenaTopRight);
+
+				_robot.PerformProgrammedMoves();
+
+				Assert.AreEqual(EXPECTED_END_POINT, _robot.ToString());
+			}	
+
+			[Test]
+			public void PreProgrammedRobotTwo_ShouldArriveAtItsDestinationSafely()
+			{
+				const string EXPECTED_END_POINT = "5 1 E";
+
+				var _robot = new Domain.Robot.Robot(renderer.Object, new Point(3, 3), Orientation.East, "MMRMMRMRRM");
+				_robot.SetArenaSize(ArenaBottomLeft, ArenaTopRight);
+
+				_robot.PerformProgrammedMoves();
+
+				Assert.AreEqual(EXPECTED_END_POINT, _robot.ToString());
+			}	
+		}
 
 		public class WhenMovingWithinArenaBounds
 		{
