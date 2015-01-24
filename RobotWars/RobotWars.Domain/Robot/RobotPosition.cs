@@ -52,5 +52,29 @@ namespace RobotWars.Domain.Robot
 			position = new Point(0, 0);
 			return false;
 		}
+
+		public Point GetLocationAfterMove(string orientation)
+		{
+			Point _newLocation = _currentPosition;
+			switch (orientation)
+			{
+				case "N":
+					_newLocation.Y += 1;
+					break;
+				case "E":
+					_newLocation.X += 1;
+					break;
+				case "S":
+					_newLocation.Y -= 1;
+					break;
+				case "W":
+					_newLocation.X -= 1;
+					break;
+				default:
+					throw new ArgumentOutOfRangeException("orientation");
+			}
+
+			return _newLocation;
+		}
 	}
 }

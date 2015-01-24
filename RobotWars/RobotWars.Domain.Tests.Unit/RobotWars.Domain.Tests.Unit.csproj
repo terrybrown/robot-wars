@@ -49,7 +49,7 @@
     <Compile Include="NullRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Robot\RobotOrientationTests.cs" />
-    <Compile Include="Robot\RobotMovementTests.cs" />
+    <Compile Include="Robot\RobotTests.cs" />
     <Compile Include="Robot\RobotMovesTests.cs" />
     <Compile Include="Validation\ArenaValidationTests.cs" />
     <Compile Include="Validation\GeneralInputValidationTests.cs" />
