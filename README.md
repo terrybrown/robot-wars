@@ -2,17 +2,32 @@
 Programming test for OpenTable
 
 
-
-
 - Next branches
-	- each robot taking single turn each (and 'MakeNextMove' being put in)
 	- arena/game interaction, and tracking the location of the robots on the arena
 
 
+##v0.0.4 - Robots now take each move in turn
+- Slight refactoring to allow robots to make a single move at a time
+- Makes it easier to have all robots move in parallel (if that's where the spec took it)
+
+####TODO
+- Use the IInputRenderer, IOutputRenderer in the DataCollection classes
+- Investigate ways we can make the robot less dependent upon the knowledge of the arena bounds 
+- Make each robot take their turns 'in turn' rather than a robot go through it's full set of moves
+- Need to clarify what the role of the RobotWarsGame is - I think it's a little superfluous at the moment
+
+
+####FUTURE
+- Robots running in parallel 
+- Non-zero based grids
+- Full support of non-rectangular arena's (would need solid point checking against inside/outside of polygon)
+- Collision detection/awareness between the robots
+- Events based notifications
+- Z axis? ;)
 
 
 > **NOTE** From this point up over, we're into 'funsies' category - v0.0.3 delivers on the basic spec
-> as a developer I'd want to do a lot more with it (validation etc.)
+> as a developer I'd want to do a lot more with it
 
 
 

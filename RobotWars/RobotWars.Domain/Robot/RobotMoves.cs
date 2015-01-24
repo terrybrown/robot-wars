@@ -39,5 +39,10 @@ namespace RobotWars.Domain.Robot
 		{
 			return new string(_preProgrammedMoves.ToArray());
 		}
+
+		public bool HasMovedRemaining()
+		{
+			return _preProgrammedMoves.Count > 0;
+		}
 	}
 }
