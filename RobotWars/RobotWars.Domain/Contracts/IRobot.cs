@@ -13,6 +13,7 @@ namespace RobotWars.Domain.Contracts
 		/// <exception cref="ArgumentOutOfRangeException">Thrown when the robot is outside of the arena</exception>
 		void SetArenaSize(Point arenaBottomLeft, Point arenaTopRight);
 
-		void PerformProgrammedMoves();
+		void PerformNextMove();
+		bool HasMovesRemaining();
 	}
 }

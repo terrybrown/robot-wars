@@ -34,10 +34,13 @@ namespace RobotWars.Domain.Robot
 
 		/// <exception cref="ArgumentNullException">Thrown when the arena hasn't been setup</exception>
 		/// <exception cref="ArgumentOutOfRangeException">Thrown when the robot attempts to move outside of the arena</exception>
-		public void PerformProgrammedMoves()
+		public void PerformNextMove()
 		{
+			if (_arenaBottomLeft == null || _arenaTopRight == null) 
+				throw new ArgumentNullException("Arena not setup");
+
 			char? _nextMove = _robotMoves.GetNextMove();
-			while (_nextMove != null)
+			if (_nextMove != null)
 			{
 				switch (_nextMove)
 				{
@@ -48,30 +51,20 @@ namespace RobotWars.Domain.Robot
 						_orientation.TurnRight();
 						break;
 					case 'M':
-						try
-						{
-							MoveForward();
-						}
-						catch (ArgumentOutOfRangeException)
-						{
-							_renderer.RenderError("Attempt to move to a location outside of the arena - FROM: {0} DIRECTION: {1}", 
-													_robotPosition.GetCurrentLocation(), 
-													_orientation.ToString());
-						}
+						MoveForward();
 						break;
 				}
-
-				_nextMove = _robotMoves.GetNextMove();
 			}
 		}
 
-		/// <exception cref="ArgumentNullException">Thrown when the arena hasn't been setup</exception>
+		public bool HasMovesRemaining()
+		{
+			return _robotMoves.HasMovedRemaining();
+		}
+
 		/// <exception cref="ArgumentOutOfRangeException">Thrown when the robot attempts to move outside of the arena</exception>
 		private void MoveForward()
 		{
-			if (_arenaBottomLeft == null || _arenaTopRight == null) 
-				throw new ArgumentNullException("Arena not setup");
-
 			string _currentOrientation	= _orientation.GetOrientationAsSingleLetterCompassPoint();
 			Point _newLocation			= _robotPosition.GetLocationAfterMove(_currentOrientation);
 
