@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using RobotWars.Domain.Robot;
 
-namespace RobotWars.Domain.Tests.Unit
+namespace RobotWars.Domain.Tests.Unit.Robot
 {
 	[TestFixture]
 	public class RobotOrientationTests
@@ -19,7 +19,7 @@ namespace RobotWars.Domain.Tests.Unit
 			{
 				var _orientation = new RobotOrientation(Renderer, NORTH);
 
-				Assert.AreEqual(_orientation.GetOrientationAsSingleLetterCompassPoint(), "N");
+				Assert.AreEqual("N", _orientation.GetOrientationAsSingleLetterCompassPoint());
 			}
 
 			[Test]

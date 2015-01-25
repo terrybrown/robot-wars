@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using Moq;
 using NUnit.Framework;
 using RobotWars.Domain.Robot;
-using RobotWars.Domain.Validation;
 
 namespace RobotWars.Domain.Tests.Unit.Robot
 {

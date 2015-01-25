@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using RobotWars.Application.Properties;
 using RobotWars.Application.Renderers;
 using RobotWars.Domain;
 using RobotWars.Domain.Contracts;
-using RobotWars.Domain.InputOutput;
 using RobotWars.Domain.Robot;
 using RobotWars.Domain.Validation;
 
