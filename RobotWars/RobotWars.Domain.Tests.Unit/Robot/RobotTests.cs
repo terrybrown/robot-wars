@@ -214,11 +214,11 @@ namespace RobotWars.Domain.Tests.Unit.Robot
 		}
 
 
-		private static void PerformRemainingMoves(Domain.Robot.Robot _robot)
+		private static void PerformRemainingMoves(Domain.Robot.Robot robot)
 		{
-			while (_robot.HasMovesRemaining())
+			while (robot.HasMovesRemaining())
 			{
-				_robot.PerformNextMove();
+				robot.PerformNextMove();
 			}
 		}
 	}

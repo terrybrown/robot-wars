@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Text.RegularExpressions;
 using RobotWars.Domain.Robot;
 
 namespace RobotWars.Domain.Validation

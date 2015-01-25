@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using RobotWars.Domain.Contracts;
 using RobotWars.Domain.InputOutput;

@@ -23,7 +23,7 @@ namespace RobotWars.Domain.Validation
 		}
 		
 		/// <summary>
-		/// Arena dimensions from 1-100 are abitrary here - realistically, we'd want nice polygon handling for the arena
+		/// Arena dimensions from 1-100 are arbitrary here - realistically, we'd want nice polygon handling for the arena
 		/// this is just an indication of a 'business rule' type scenario
 		/// </summary>
 		private static bool IsValidArenaDimension(string userInput, out int parsedArenaDimension)
