@@ -4,6 +4,7 @@ Programming test for OpenTable
 
 - Next branches
 	- arena/game interaction, and tracking the location of the robots on the arena
+	- avoid repetition on data collection (relatively straight forward)
 
 
 ##v0.0.4 - Robots now take each move in turn
