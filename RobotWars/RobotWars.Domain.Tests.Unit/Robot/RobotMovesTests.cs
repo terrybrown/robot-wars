@@ -27,32 +27,32 @@ namespace RobotWars.Domain.Tests.Unit.Robot
 			[Test]
 			public void GivenMovesWithInvalidMovesIncluded_ShouldIgnoreInvalidMoves_AndReturnCorrectMoves()
 			{
-				string _input = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-				string _expectedOutput = Regex.Replace(_input, "[^LMR]", "", RegexOptions.IgnoreCase);
+				const string INPUT = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+				string expectedOutput = Regex.Replace(INPUT, "[^LMR]", "", RegexOptions.IgnoreCase);
 
-				var _robotMoves = new RobotMoves(_input);
+				var robotMoves = new RobotMoves(INPUT);
 
-				Assert.AreEqual(_expectedOutput, _robotMoves.ToString());
+				Assert.AreEqual(expectedOutput, robotMoves.ToString());
 			}
 
 			[Test]
 			public void GivenASingleMoveOnly_ShouldReturnCorrectMoves()
 			{
-				string _input = "M";
+				const string INPUT = "M";
 				
-				var _robotMoves = new RobotMoves(_input);
+				var robotMoves = new RobotMoves(INPUT);
 
-				Assert.AreEqual(_input, _robotMoves.ToString());
+				Assert.AreEqual(INPUT, robotMoves.ToString());
 			}
 
 			[Test]
 			public void GivenMovesWithSpaces_ShouldIgnoreSpaces_AndReturnCorrectMoves()
 			{
-				var _input = " " + string.Join(" ", VALID_ROBOT_MOVES.ToArray()) + " ";
+				var input = " " + string.Join(" ", VALID_ROBOT_MOVES.ToArray()) + " ";
 				
-				var _robotMoves = new RobotMoves(_input);
+				var robotMoves = new RobotMoves(input);
 
-				Assert.AreEqual(VALID_ROBOT_MOVES, _robotMoves.ToString());
+				Assert.AreEqual(VALID_ROBOT_MOVES, robotMoves.ToString());
 			}
 		}
 	}

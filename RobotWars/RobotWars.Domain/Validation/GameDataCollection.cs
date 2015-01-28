@@ -6,20 +6,20 @@ namespace RobotWars.Domain.Validation
 	{
 		public static int ValidateArenaDimension(Func<string> userInputValueCollector, string dataCollectionMessage, string invalidInputMessage)
 		{
-			int _dimension;
+			int dimension;
 
 			Console.WriteLine(dataCollectionMessage);
-			string _userInput = userInputValueCollector.Invoke() ?? string.Empty;
+			string userInput = userInputValueCollector.Invoke() ?? string.Empty;
 
-			while (!IsValidArenaDimension(_userInput, out _dimension))
+			while (!IsValidArenaDimension(userInput, out dimension))
 			{
 				Console.WriteLine(invalidInputMessage);
 				Console.WriteLine(dataCollectionMessage);
 
-				_userInput = userInputValueCollector.Invoke() ?? string.Empty;
+				userInput = userInputValueCollector.Invoke() ?? string.Empty;
 			}
 
-			return _dimension;
+			return dimension;
 		}
 		
 		/// <summary>

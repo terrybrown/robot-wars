@@ -8,57 +8,57 @@ namespace RobotWars.Domain.Validation
 	{
 		public static Point CollectPosition(Func<string> userInputValueCollector, string dataCollectionMessage, string invalidInputMessage)
 		{
-			Point _position;
+			Point position;
 
 			Console.WriteLine(dataCollectionMessage);
-			string _userInput = userInputValueCollector.Invoke() ?? string.Empty;
+			string userInput = userInputValueCollector.Invoke() ?? string.Empty;
 
-			while (!RobotPosition.TryParsePosition(_userInput, out _position))
+			while (!RobotPosition.TryParsePosition(userInput, out position))
 			{
 				Console.WriteLine(invalidInputMessage);
 				Console.WriteLine(dataCollectionMessage);
 
-				_userInput = userInputValueCollector.Invoke() ?? string.Empty;
+				userInput = userInputValueCollector.Invoke() ?? string.Empty;
 			}
 
-			return _position;
+			return position;
 		}
 
 		public static string ValidatePreProgrammedMoves(Func<string> userInputValueCollector, string dataCollectionMessage, string invalidInputMessage)
 		{
-			string _moves;
+			string moves;
 
 			Console.WriteLine(dataCollectionMessage);
-			string _userInput = userInputValueCollector.Invoke() ?? string.Empty;
+			string userInput = userInputValueCollector.Invoke() ?? string.Empty;
 
-			while (!RobotMoves.TryParseMoves(_userInput, out _moves))
+			while (!RobotMoves.TryParseMoves(userInput, out moves))
 			{
 				Console.WriteLine(invalidInputMessage);
 				Console.WriteLine(dataCollectionMessage);
 
-				_userInput = userInputValueCollector.Invoke() ?? string.Empty;
+				userInput = userInputValueCollector.Invoke() ?? string.Empty;
 			}
 
-			return _moves;
+			return moves;
 		}
 
 
 		public static Orientation ValidateOrientation(Func<string> userInputValueCollector, string dataCollectionMessage, string invalidInputMessage)
 		{
-			Orientation _orientation;
+			Orientation orientation;
 
 			Console.WriteLine(dataCollectionMessage);
-			string _userInput = userInputValueCollector.Invoke() ?? string.Empty;
+			string userInput = userInputValueCollector.Invoke() ?? string.Empty;
 
-			while (!RobotOrientation.TryParseOrientation(_userInput, out _orientation))
+			while (!RobotOrientation.TryParseOrientation(userInput, out orientation))
 			{
 				Console.WriteLine(invalidInputMessage);
 				Console.WriteLine(dataCollectionMessage);
 
-				_userInput = userInputValueCollector.Invoke() ?? string.Empty;
+				userInput = userInputValueCollector.Invoke() ?? string.Empty;
 			}
 
-			return _orientation;
+			return orientation;
 		}
 	}
 }

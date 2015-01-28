@@ -35,12 +35,12 @@ namespace RobotWars.Domain.Tests.Unit.Robot
 			{
 				const string EXPECTED_END_POINT = "1 3 N";
 
-				var _robot = new Domain.Robot.Robot(renderer.Object, new Point(1, 2), Orientation.North, "LMLMLMLMM");
-				_robot.SetArenaSize(ArenaBottomLeft, ArenaTopRight);
+				var robot = new Domain.Robot.Robot(renderer.Object, new Point(1, 2), Orientation.North, "LMLMLMLMM");
+				robot.SetArenaSize(ArenaBottomLeft, ArenaTopRight);
 
-				PerformRemainingMoves(_robot);
+				PerformRemainingMoves(robot);
 
-				Assert.AreEqual(EXPECTED_END_POINT, _robot.ToString());
+				Assert.AreEqual(EXPECTED_END_POINT, robot.ToString());
 			}
 
 			[Test]
@@ -48,12 +48,12 @@ namespace RobotWars.Domain.Tests.Unit.Robot
 			{
 				const string EXPECTED_END_POINT = "5 1 E";
 
-				var _robot = new Domain.Robot.Robot(renderer.Object, new Point(3, 3), Orientation.East, "MMRMMRMRRM");
-				_robot.SetArenaSize(ArenaBottomLeft, ArenaTopRight);
+				var robot = new Domain.Robot.Robot(renderer.Object, new Point(3, 3), Orientation.East, "MMRMMRMRRM");
+				robot.SetArenaSize(ArenaBottomLeft, ArenaTopRight);
 
-				PerformRemainingMoves(_robot);
+				PerformRemainingMoves(robot);
 
-				Assert.AreEqual(EXPECTED_END_POINT, _robot.ToString());
+				Assert.AreEqual(EXPECTED_END_POINT, robot.ToString());
 			}
 		}
 
@@ -76,12 +76,12 @@ namespace RobotWars.Domain.Tests.Unit.Robot
 			{
 				const string EXPECTED_END_POINT = "3 4 N";
 
-				var _robot = new Domain.Robot.Robot(renderer.Object, new Point(3, 3), Orientation.North, "M");
-				_robot.SetArenaSize(ArenaBottomLeft, ArenaTopRight);
+				var robot = new Domain.Robot.Robot(renderer.Object, new Point(3, 3), Orientation.North, "M");
+				robot.SetArenaSize(ArenaBottomLeft, ArenaTopRight);
 
-				PerformRemainingMoves(_robot);
+				PerformRemainingMoves(robot);
 
-				Assert.AreEqual(EXPECTED_END_POINT, _robot.ToString());
+				Assert.AreEqual(EXPECTED_END_POINT, robot.ToString());
 			}
 
 			[Test]
@@ -89,12 +89,12 @@ namespace RobotWars.Domain.Tests.Unit.Robot
 			{
 				const string EXPECTED_END_POINT = "4 3 E";
 
-				var _robot = new Domain.Robot.Robot(renderer.Object, new Point(3, 3), Orientation.East, "M");
-				_robot.SetArenaSize(ArenaBottomLeft, ArenaTopRight);
+				var robot = new Domain.Robot.Robot(renderer.Object, new Point(3, 3), Orientation.East, "M");
+				robot.SetArenaSize(ArenaBottomLeft, ArenaTopRight);
 
-				PerformRemainingMoves(_robot);
+				PerformRemainingMoves(robot);
 
-				Assert.AreEqual(EXPECTED_END_POINT, _robot.ToString());
+				Assert.AreEqual(EXPECTED_END_POINT, robot.ToString());
 			}
 
 			[Test]
@@ -102,12 +102,12 @@ namespace RobotWars.Domain.Tests.Unit.Robot
 			{
 				const string EXPECTED_END_POINT = "3 2 S";
 
-				var _robot = new Domain.Robot.Robot(renderer.Object, new Point(3, 3), Orientation.South, "M");
-				_robot.SetArenaSize(ArenaBottomLeft, ArenaTopRight);
+				var robot = new Domain.Robot.Robot(renderer.Object, new Point(3, 3), Orientation.South, "M");
+				robot.SetArenaSize(ArenaBottomLeft, ArenaTopRight);
 
-				PerformRemainingMoves(_robot);
+				PerformRemainingMoves(robot);
 
-				Assert.AreEqual(EXPECTED_END_POINT, _robot.ToString());
+				Assert.AreEqual(EXPECTED_END_POINT, robot.ToString());
 			}
 
 			[Test]
@@ -115,12 +115,12 @@ namespace RobotWars.Domain.Tests.Unit.Robot
 			{
 				const string EXPECTED_END_POINT = "2 3 W";
 
-				var _robot = new Domain.Robot.Robot(renderer.Object, new Point(3, 3), Orientation.West, "M");
-				_robot.SetArenaSize(ArenaBottomLeft, ArenaTopRight);
+				var robot = new Domain.Robot.Robot(renderer.Object, new Point(3, 3), Orientation.West, "M");
+				robot.SetArenaSize(ArenaBottomLeft, ArenaTopRight);
 
-				PerformRemainingMoves(_robot);
+				PerformRemainingMoves(robot);
 
-				Assert.AreEqual(EXPECTED_END_POINT, _robot.ToString());
+				Assert.AreEqual(EXPECTED_END_POINT, robot.ToString());
 			}
 
 
@@ -148,45 +148,45 @@ namespace RobotWars.Domain.Tests.Unit.Robot
 			[Test]
 			public void MovingTooFarNorth_ShouldThrowAppropriateException()
 			{
-				var _robot = new Domain.Robot.Robot(renderer.Object, new Point(0, ARENA_HEIGHT), Orientation.North, "M");
-				_robot.SetArenaSize(ArenaBottomLeft, ArenaTopRight);
-				var _startPosition = _robot.ToString();
+				var robot = new Domain.Robot.Robot(renderer.Object, new Point(0, ARENA_HEIGHT), Orientation.North, "M");
+				robot.SetArenaSize(ArenaBottomLeft, ArenaTopRight);
+				var startPosition = robot.ToString();
 
-				Assert.Throws<ArgumentOutOfRangeException>(() => _robot.PerformNextMove());
-				Assert.AreEqual(_startPosition, _robot.ToString());
+				Assert.Throws<ArgumentOutOfRangeException>(() => robot.PerformNextMove());
+				Assert.AreEqual(startPosition, robot.ToString());
 			}
 
 			[Test]
 			public void MovingTooFarEast_ShouldThrowAppropriateException()
 			{
-				var _robot = new Domain.Robot.Robot(renderer.Object, new Point(ARENA_WIDTH, 0), Orientation.East, "M");
-				_robot.SetArenaSize(ArenaBottomLeft, ArenaTopRight);
-				var _startPosition = _robot.ToString();
+				var robot = new Domain.Robot.Robot(renderer.Object, new Point(ARENA_WIDTH, 0), Orientation.East, "M");
+				robot.SetArenaSize(ArenaBottomLeft, ArenaTopRight);
+				var startPosition = robot.ToString();
 
-				Assert.Throws<ArgumentOutOfRangeException>(() => _robot.PerformNextMove());
-				Assert.AreEqual(_startPosition, _robot.ToString());
+				Assert.Throws<ArgumentOutOfRangeException>(() => robot.PerformNextMove());
+				Assert.AreEqual(startPosition, robot.ToString());
 			}
 
 			[Test]
 			public void MovingTooFarSouth_ShouldThrowAppropriateException()
 			{
-				var _robot = new Domain.Robot.Robot(renderer.Object, new Point(0, 0), Orientation.South, "M");
-				_robot.SetArenaSize(ArenaBottomLeft, ArenaTopRight);
-				var _startPosition = _robot.ToString();
+				var robot = new Domain.Robot.Robot(renderer.Object, new Point(0, 0), Orientation.South, "M");
+				robot.SetArenaSize(ArenaBottomLeft, ArenaTopRight);
+				var startPosition = robot.ToString();
 
-				Assert.Throws<ArgumentOutOfRangeException>(() => _robot.PerformNextMove());
-				Assert.AreEqual(_startPosition, _robot.ToString());
+				Assert.Throws<ArgumentOutOfRangeException>(() => robot.PerformNextMove());
+				Assert.AreEqual(startPosition, robot.ToString());
 			}
 
 			[Test]
 			public void MovingTooFarWest_ShouldThrowAppropriateException()
 			{
-				var _robot = new Domain.Robot.Robot(renderer.Object, new Point(0, 0), Orientation.West, "M");
-				_robot.SetArenaSize(ArenaBottomLeft, ArenaTopRight);
-				var _startPosition = _robot.ToString();
+				var robot = new Domain.Robot.Robot(renderer.Object, new Point(0, 0), Orientation.West, "M");
+				robot.SetArenaSize(ArenaBottomLeft, ArenaTopRight);
+				var startPosition = robot.ToString();
 
-				Assert.Throws<ArgumentOutOfRangeException>(() => _robot.PerformNextMove());
-				Assert.AreEqual(_startPosition, _robot.ToString());
+				Assert.Throws<ArgumentOutOfRangeException>(() => robot.PerformNextMove());
+				Assert.AreEqual(startPosition, robot.ToString());
 			}
 		}
 
@@ -207,9 +207,9 @@ namespace RobotWars.Domain.Tests.Unit.Robot
 			[Test]
 			public void AnyMovement_ShouldThrowAppropriateException()
 			{
-				var _robot = new Domain.Robot.Robot(renderer.Object, new Point(0, ARENA_HEIGHT), Orientation.North, "M");
+				var robot = new Domain.Robot.Robot(renderer.Object, new Point(0, ARENA_HEIGHT), Orientation.North, "M");
 
-				Assert.Throws<ArgumentNullException>(() => PerformRemainingMoves(_robot));
+				Assert.Throws<ArgumentNullException>(() => PerformRemainingMoves(robot));
 			}
 		}
 

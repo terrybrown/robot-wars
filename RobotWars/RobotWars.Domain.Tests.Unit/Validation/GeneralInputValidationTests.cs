@@ -12,57 +12,57 @@ namespace RobotWars.Domain.Tests.Unit.Validation
 		public class DoesInputMatchSuccessValue
 		{
 			private const string SUCCESS_INPUT = "Y";
-			Mock<Func<string>> _userInputCollector;
-			readonly Queue<string> _inputs = new Queue<string>();
+			Mock<Func<string>> userInputCollector;
+			readonly Queue<string> inputs = new Queue<string>();
 
 			[SetUp]
 			public void BeforeEachTest()
 			{
-				_inputs.Clear();
-				_userInputCollector = new Mock<Func<string>>();
-				_userInputCollector.Setup( x => x() ).Returns(() => _inputs.Dequeue());
+				inputs.Clear();
+				userInputCollector = new Mock<Func<string>>();
+				userInputCollector.Setup( x => x() ).Returns(() => inputs.Dequeue());
 			}
 
 			[TearDown]
 			public void AfterEachTest()
 			{
-				_userInputCollector = null;	
+				userInputCollector = null;	
 			}
 
 			[Test]
 			public void GivenNullAsInput_ShouldReturnFalse()
 			{
-				_inputs.Enqueue(null);
+				inputs.Enqueue(null);
 				
-				Assert.IsFalse(GeneralDataCollection.DoesInputMatchSuccessValue(_userInputCollector.Object, SUCCESS_INPUT));
-				_userInputCollector.Verify(x => x(), Times.Once);
+				Assert.IsFalse(GeneralDataCollection.DoesInputMatchSuccessValue(userInputCollector.Object, SUCCESS_INPUT));
+				userInputCollector.Verify(x => x(), Times.Once);
 			}
 
 			[Test]
 			public void GivenNonSuccessInput_ShouldReturnFalse()
 			{
-				_inputs.Enqueue("N");
+				inputs.Enqueue("N");
 				
-				Assert.IsFalse(GeneralDataCollection.DoesInputMatchSuccessValue(_userInputCollector.Object, SUCCESS_INPUT));
-				_userInputCollector.Verify(x => x(), Times.Once);
+				Assert.IsFalse(GeneralDataCollection.DoesInputMatchSuccessValue(userInputCollector.Object, SUCCESS_INPUT));
+				userInputCollector.Verify(x => x(), Times.Once);
 			}
 
 			[Test]
 			public void GivenSuccessInputInLowercase_ShouldReturnTrue()
 			{
-				_inputs.Enqueue(SUCCESS_INPUT.ToLowerInvariant());
+				inputs.Enqueue(SUCCESS_INPUT.ToLowerInvariant());
 				
-				Assert.IsTrue(GeneralDataCollection.DoesInputMatchSuccessValue(_userInputCollector.Object, SUCCESS_INPUT));
-				_userInputCollector.Verify(x => x(), Times.Once);
+				Assert.IsTrue(GeneralDataCollection.DoesInputMatchSuccessValue(userInputCollector.Object, SUCCESS_INPUT));
+				userInputCollector.Verify(x => x(), Times.Once);
 			}
 
 			[Test]
 			public void GivenSuccessInputInUppercase_ShouldReturnTrue()
 			{
-				_inputs.Enqueue(SUCCESS_INPUT.ToUpperInvariant());
+				inputs.Enqueue(SUCCESS_INPUT.ToUpperInvariant());
 				
-				Assert.IsTrue(GeneralDataCollection.DoesInputMatchSuccessValue(_userInputCollector.Object, SUCCESS_INPUT));
-				_userInputCollector.Verify(x => x(), Times.Once);
+				Assert.IsTrue(GeneralDataCollection.DoesInputMatchSuccessValue(userInputCollector.Object, SUCCESS_INPUT));
+				userInputCollector.Verify(x => x(), Times.Once);
 			}
 		}
 	}

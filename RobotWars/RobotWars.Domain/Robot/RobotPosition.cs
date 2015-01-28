@@ -6,7 +6,7 @@ namespace RobotWars.Domain.Robot
 {
 	internal class RobotPosition
 	{
-		private Point _currentPosition;
+		private Point currentPosition;
 
 		public RobotPosition(Point positionOnArena)
 		{
@@ -15,20 +15,20 @@ namespace RobotWars.Domain.Robot
 				throw new ArgumentOutOfRangeException("positionOnArena", "Invalid position specificed for the robot");				
 			}
 
-			_currentPosition = positionOnArena;
+			currentPosition = positionOnArena;
 		}
 
-		public int X { get { return _currentPosition.X; } }
-		public int Y { get { return _currentPosition.Y; } }
+		public int X { get { return currentPosition.X; } }
+		public int Y { get { return currentPosition.Y; } }
 
 		public Point GetCurrentLocation()
 		{
-			return _currentPosition;
+			return currentPosition;
 		}
 
 		public void SetCurrentLocation(Point newLocation)
 		{
-			_currentPosition = newLocation;
+			currentPosition = newLocation;
 		}
 
 		public static bool TryParsePosition(string userInput, out Point position)
@@ -39,12 +39,12 @@ namespace RobotWars.Domain.Robot
 				return false;
 			}
 
-			string[] _xAndY = Regex.Replace(userInput, @"\s+", "").Split(',');
+			string[] xAndY = Regex.Replace(userInput, @"\s+", "").Split(',');
 
-			int _x, _y;
-			if (int.TryParse(_xAndY[0], out _x) && int.TryParse(_xAndY[1], out _y))
+			int x, y;
+			if (int.TryParse(xAndY[0], out x) && int.TryParse(xAndY[1], out y))
 			{
-				position = new Point(_x, _y);
+				position = new Point(x, y);
 				return true;
 			}
 
@@ -54,26 +54,26 @@ namespace RobotWars.Domain.Robot
 
 		public Point GetLocationAfterMove(string orientation)
 		{
-			Point _newLocation = _currentPosition;
+			Point newLocation = currentPosition;
 			switch (orientation)
 			{
 				case "N":
-					_newLocation.Y += 1;
+					newLocation.Y += 1;
 					break;
 				case "E":
-					_newLocation.X += 1;
+					newLocation.X += 1;
 					break;
 				case "S":
-					_newLocation.Y -= 1;
+					newLocation.Y -= 1;
 					break;
 				case "W":
-					_newLocation.X -= 1;
+					newLocation.X -= 1;
 					break;
 				default:
 					throw new ArgumentOutOfRangeException("orientation");
 			}
 
-			return _newLocation;
+			return newLocation;
 		}
 	}
 }

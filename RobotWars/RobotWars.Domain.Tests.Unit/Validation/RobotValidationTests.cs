@@ -17,72 +17,72 @@ namespace RobotWars.Domain.Tests.Unit.Validation
 			private static readonly Point ValidRobotPositionAsPoint = new Point(5,5);
 			private static readonly string ValidArenaDimension		= string.Format("{0},{1}", ValidRobotPositionAsPoint.X, ValidRobotPositionAsPoint.Y);
 
-			Mock<Func<string>> _userInputCollector;
-			readonly Queue<string> _inputs = new Queue<string>();
+			Mock<Func<string>> userInputCollector;
+			readonly Queue<string> inputs = new Queue<string>();
 
 			[SetUp]
 			public void BeforeEachTest()
 			{
-				_inputs.Clear();
-				_userInputCollector = new Mock<Func<string>>();
-				_userInputCollector.Setup( x => x() ).Returns(() => _inputs.Dequeue());
+				inputs.Clear();
+				userInputCollector = new Mock<Func<string>>();
+				userInputCollector.Setup( x => x() ).Returns(() => inputs.Dequeue());
 			}
 
 			[TearDown]
 			public void AfterEachTest()
 			{
-				_userInputCollector = null;	
+				userInputCollector = null;	
 			}
 
 			[Test]
 			public void GivenNullAsPoint_ThenValidPoint_ShouldReturnCorrectPoint()
 			{
-				_inputs.Enqueue(null);
-				_inputs.Enqueue(ValidArenaDimension);
+				inputs.Enqueue(null);
+				inputs.Enqueue(ValidArenaDimension);
 				
-				Point _arenaDimension = RobotDataCollection.CollectPosition(_userInputCollector.Object, "", "");
+				Point arenaDimension = RobotDataCollection.CollectPosition(userInputCollector.Object, "", "");
 
-				Assert.AreEqual(ValidRobotPositionAsPoint, _arenaDimension);
-				_userInputCollector.Verify(x => x(), Times.Exactly(2));
+				Assert.AreEqual(ValidRobotPositionAsPoint, arenaDimension);
+				userInputCollector.Verify(x => x(), Times.Exactly(2));
 			}
 
 			[Test]
 			public void GivenPointWithoutAComma_ThenValidPoint_ShouldReturnCorrectPoint()
 			{
-				_inputs.Enqueue("6 6");
-				_inputs.Enqueue(ValidArenaDimension);
+				inputs.Enqueue("6 6");
+				inputs.Enqueue(ValidArenaDimension);
 				
-				Point _arenaDimension = RobotDataCollection.CollectPosition(_userInputCollector.Object, "", "");
+				Point arenaDimension = RobotDataCollection.CollectPosition(userInputCollector.Object, "", "");
 
-				Assert.AreEqual(ValidRobotPositionAsPoint, _arenaDimension);
-				_userInputCollector.Verify(x => x(), Times.Exactly(2));
+				Assert.AreEqual(ValidRobotPositionAsPoint, arenaDimension);
+				userInputCollector.Verify(x => x(), Times.Exactly(2));
 			}
 
 			[Test]
 			public void GivenPointWithNoNumbers_ThenValidPoint_ShouldReturnCorrectPoint()
 			{
-				_inputs.Enqueue("A,B");
-				_inputs.Enqueue(ValidArenaDimension);
+				inputs.Enqueue("A,B");
+				inputs.Enqueue(ValidArenaDimension);
 				
-				Point _arenaDimension = RobotDataCollection.CollectPosition(_userInputCollector.Object, "", "");
+				Point arenaDimension = RobotDataCollection.CollectPosition(userInputCollector.Object, "", "");
 
-				Assert.AreEqual(ValidRobotPositionAsPoint, _arenaDimension);
-				_userInputCollector.Verify(x => x(), Times.Exactly(2));
+				Assert.AreEqual(ValidRobotPositionAsPoint, arenaDimension);
+				userInputCollector.Verify(x => x(), Times.Exactly(2));
 			}
 
 			[Test]
 			public void GivenPointWithTooManyElements_ShouldIgnoreExtraElements_AndReturnCorrectPoint()
 			{
-				Point _expectedOutput = new Point(8,8);
-				_inputs.Enqueue(string.Format("{0},{1},A,B,C,D",
-					_expectedOutput.X,
-					_expectedOutput.Y));
-				_inputs.Enqueue(ValidArenaDimension);
+				Point expectedOutput = new Point(8,8);
+				inputs.Enqueue(string.Format("{0},{1},A,B,C,D",
+					expectedOutput.X,
+					expectedOutput.Y));
+				inputs.Enqueue(ValidArenaDimension);
 				
-				Point _arenaDimension = RobotDataCollection.CollectPosition(_userInputCollector.Object, "", "");
+				Point arenaDimension = RobotDataCollection.CollectPosition(userInputCollector.Object, "", "");
 
-				Assert.AreEqual(_expectedOutput, _arenaDimension);
-				_userInputCollector.Verify(x => x(), Times.Once);
+				Assert.AreEqual(expectedOutput, arenaDimension);
+				userInputCollector.Verify(x => x(), Times.Once);
 			}
 
 		}
@@ -92,85 +92,85 @@ namespace RobotWars.Domain.Tests.Unit.Validation
 		{
 			private const string VALID_ROBOT_MOVES = "MLMRMLMR";
 
-			Mock<Func<string>> _userInputCollector;
-			readonly Queue<string> _inputs = new Queue<string>();
+			Mock<Func<string>> userInputCollector;
+			readonly Queue<string> inputs = new Queue<string>();
 
 			[SetUp]
 			public void BeforeEachTest()
 			{
-				_inputs.Clear();
-				_userInputCollector = new Mock<Func<string>>();
-				_userInputCollector.Setup( x => x() ).Returns(() => _inputs.Dequeue());
+				inputs.Clear();
+				userInputCollector = new Mock<Func<string>>();
+				userInputCollector.Setup( x => x() ).Returns(() => inputs.Dequeue());
 			}
 
 			[TearDown]
 			public void AfterEachTest()
 			{
-				_userInputCollector = null;	
+				userInputCollector = null;	
 			}
 
 			[Test]
 			public void GivenNullAsMoves_ThenValidMoves_ShouldReturnCorrectMoves()
 			{
-				_inputs.Enqueue(null);
-				_inputs.Enqueue(VALID_ROBOT_MOVES);
+				inputs.Enqueue(null);
+				inputs.Enqueue(VALID_ROBOT_MOVES);
 				
-				string _moves = RobotDataCollection.ValidatePreProgrammedMoves(_userInputCollector.Object, "", "");
+				string moves = RobotDataCollection.ValidatePreProgrammedMoves(userInputCollector.Object, "", "");
 
-				Assert.AreEqual(VALID_ROBOT_MOVES, _moves);
-				_userInputCollector.Verify(x => x(), Times.Exactly(2));
+				Assert.AreEqual(VALID_ROBOT_MOVES, moves);
+				userInputCollector.Verify(x => x(), Times.Exactly(2));
 			}
 
 			[Test]
 			public void GivenMovesWithSpaces_ShouldReturnCorrectMovesWithSpacesRemoved()
 			{
-				_inputs.Enqueue(" " + string.Join(" ", VALID_ROBOT_MOVES.ToArray()) + " ");
+				inputs.Enqueue(" " + string.Join(" ", VALID_ROBOT_MOVES.ToArray()) + " ");
 				
-				string _moves = RobotDataCollection.ValidatePreProgrammedMoves(_userInputCollector.Object, "", "");
+				string moves = RobotDataCollection.ValidatePreProgrammedMoves(userInputCollector.Object, "", "");
 
-				Assert.AreEqual(VALID_ROBOT_MOVES, _moves);
-				_userInputCollector.Verify(x => x(), Times.Once);
+				Assert.AreEqual(VALID_ROBOT_MOVES, moves);
+				userInputCollector.Verify(x => x(), Times.Once);
 			}
 
 			[Test]
 			public void GivenMovesWithNoValidMoves_ThenValidMoves_ShouldReturnCorrectMoves()
 			{
-				_inputs.Enqueue("ABCDEFGHIJKNOPQSTUVWXYZ");
-				_inputs.Enqueue(VALID_ROBOT_MOVES);
+				inputs.Enqueue("ABCDEFGHIJKNOPQSTUVWXYZ");
+				inputs.Enqueue(VALID_ROBOT_MOVES);
 				
-				string _moves = RobotDataCollection.ValidatePreProgrammedMoves(_userInputCollector.Object, "", "");
+				string moves = RobotDataCollection.ValidatePreProgrammedMoves(userInputCollector.Object, "", "");
 
-				Assert.AreEqual(VALID_ROBOT_MOVES, _moves);
-				_userInputCollector.Verify(x => x(), Times.Exactly(2));
+				Assert.AreEqual(VALID_ROBOT_MOVES, moves);
+				userInputCollector.Verify(x => x(), Times.Exactly(2));
 			}
 
 			[Test]
 			public void GivenMovesWithInvalidMovesIncluded_ShouldIgnoreInvalidMoves_AndReturnCorrectMoves()
 			{
-				string _input = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-				string _expectedOutput = Regex.Replace(_input, "[^LMR]", "", RegexOptions.IgnoreCase);
+				const string INPUT = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+				string expectedOutput = Regex.Replace(INPUT, "[^LMR]", "", RegexOptions.IgnoreCase);
 
-				_inputs.Enqueue(_input);
-				_inputs.Enqueue(VALID_ROBOT_MOVES);
+				inputs.Enqueue(INPUT);
+				inputs.Enqueue(VALID_ROBOT_MOVES);
 				
-				string _moves = RobotDataCollection.ValidatePreProgrammedMoves(_userInputCollector.Object, "", "");
+				string moves = RobotDataCollection.ValidatePreProgrammedMoves(userInputCollector.Object, "", "");
 
-				Assert.AreEqual(_expectedOutput, _moves);
-				_userInputCollector.Verify(x => x(), Times.Once);
+				Assert.AreEqual(expectedOutput, moves);
+				userInputCollector.Verify(x => x(), Times.Once);
 			}
 
 			[Test]
 			public void GivenASingleMoveOnly_ShouldReturnCorrectMoves()
 			{
-				string _input = "M";
+				const string INPUT = "M";
 
-				_inputs.Enqueue(_input);
-				_inputs.Enqueue(VALID_ROBOT_MOVES);
+				inputs.Enqueue(INPUT);
+				inputs.Enqueue(VALID_ROBOT_MOVES);
 				
-				string _moves = RobotDataCollection.ValidatePreProgrammedMoves(_userInputCollector.Object, "", "");
+				string moves = RobotDataCollection.ValidatePreProgrammedMoves(userInputCollector.Object, "", "");
 
-				Assert.AreEqual(_input, _moves);
-				_userInputCollector.Verify(x => x(), Times.Once);
+				Assert.AreEqual(INPUT, moves);
+				userInputCollector.Verify(x => x(), Times.Once);
 			}
 		}
 	}

@@ -17,17 +17,17 @@ namespace RobotWars.Domain.Tests.Unit.Robot
 			[Test]
 			public void AndInitialOrientationOfNorth_GetOrientationShouldReturnNorth()
 			{
-				var _orientation = new RobotOrientation(Renderer, NORTH);
+				var orientation = new RobotOrientation(Renderer, NORTH);
 
-				Assert.AreEqual("N", _orientation.GetOrientationAsSingleLetterCompassPoint());
+				Assert.AreEqual("N", orientation.GetOrientationAsSingleLetterCompassPoint());
 			}
 
 			[Test]
 			public void AndInitialOrientationOfSouth_GetOrientationShouldReturnSouth()
 			{
-				var _orientation = new RobotOrientation(Renderer, SOUTH);
+				var orientation = new RobotOrientation(Renderer, SOUTH);
 
-				Assert.AreEqual("S", _orientation.GetOrientationAsSingleLetterCompassPoint());
+				Assert.AreEqual("S", orientation.GetOrientationAsSingleLetterCompassPoint());
 			}
 		}
 
@@ -36,71 +36,71 @@ namespace RobotWars.Domain.Tests.Unit.Robot
 			[Test]
 			public void WhenInitialOrientationIsNorth_GetOrientationWillReturnWest()
 			{
-				var _orientation = new RobotOrientation(Renderer, NORTH);
+				var orientation = new RobotOrientation(Renderer, NORTH);
 
-				_orientation.TurnLeft();
+				orientation.TurnLeft();
 
-				Assert.AreEqual("W", _orientation.GetOrientationAsSingleLetterCompassPoint());
+				Assert.AreEqual("W", orientation.GetOrientationAsSingleLetterCompassPoint());
 			}
 
 			[Test]
 			public void WhenInitialOrientationIsWest_GetOrientationWillReturnSouth()
 			{
-				var _orientation = new RobotOrientation(Renderer, WEST);
+				var orientation = new RobotOrientation(Renderer, WEST);
 
-				_orientation.TurnLeft();
+				orientation.TurnLeft();
 
-				Assert.AreEqual("S", _orientation.GetOrientationAsSingleLetterCompassPoint());
+				Assert.AreEqual("S", orientation.GetOrientationAsSingleLetterCompassPoint());
 			}
 
 			[Test]
 			public void WhenInitialOrientationIsSouth_GetOrientationWillReturnEast()
 			{
-				var _orientation = new RobotOrientation(Renderer, SOUTH);
+				var orientation = new RobotOrientation(Renderer, SOUTH);
 
-				_orientation.TurnLeft();
+				orientation.TurnLeft();
 
-				Assert.AreEqual("E", _orientation.GetOrientationAsSingleLetterCompassPoint());
+				Assert.AreEqual("E", orientation.GetOrientationAsSingleLetterCompassPoint());
 			}
 
 			[Test]
 			public void WhenInitialOrientationIsEast_GetOrientationWillReturnNorth()
 			{
-				var _orientation = new RobotOrientation(Renderer, EAST);
+				var orientation = new RobotOrientation(Renderer, EAST);
 
-				_orientation.TurnLeft();
+				orientation.TurnLeft();
 
-				Assert.AreEqual("N", _orientation.GetOrientationAsSingleLetterCompassPoint());
+				Assert.AreEqual("N", orientation.GetOrientationAsSingleLetterCompassPoint());
 			}
 
 			[Test]
 			public void WhenTurningTwiceAndInitialOrientationIsEast_GetOrientationWillReturnWest()
 			{
-				var _orientation = new RobotOrientation(Renderer, EAST);
+				var orientation = new RobotOrientation(Renderer, EAST);
 
-				_orientation.TurnLeft().TurnLeft();
+				orientation.TurnLeft().TurnLeft();
 
-				Assert.AreEqual("W", _orientation.GetOrientationAsSingleLetterCompassPoint());
+				Assert.AreEqual("W", orientation.GetOrientationAsSingleLetterCompassPoint());
 			}
 
 			[Test]
 			public void WhenTurningThreeTimesAndInitialOrientationIsEast_GetOrientationWillReturnSouth()
 			{
-				var _orientation = new RobotOrientation(Renderer, EAST);
+				var orientation = new RobotOrientation(Renderer, EAST);
 
-				_orientation.TurnLeft().TurnLeft().TurnLeft();
+				orientation.TurnLeft().TurnLeft().TurnLeft();
 
-				Assert.AreEqual("S", _orientation.GetOrientationAsSingleLetterCompassPoint());
+				Assert.AreEqual("S", orientation.GetOrientationAsSingleLetterCompassPoint());
 			}
 
 			[Test]
 			public void WhenTurningFourTimesAndInitialOrientationIsEast_GetOrientationWillReturnEast()
 			{
-				var _orientation = new RobotOrientation(Renderer, EAST);
+				var orientation = new RobotOrientation(Renderer, EAST);
 
-				_orientation.TurnLeft().TurnLeft().TurnLeft().TurnLeft();
+				orientation.TurnLeft().TurnLeft().TurnLeft().TurnLeft();
 
-				Assert.AreEqual("E", _orientation.GetOrientationAsSingleLetterCompassPoint());
+				Assert.AreEqual("E", orientation.GetOrientationAsSingleLetterCompassPoint());
 			}
 
 		}
@@ -110,71 +110,71 @@ namespace RobotWars.Domain.Tests.Unit.Robot
 			[Test]
 			public void WhenInitialOrientationIsNorth_GetOrientationWillReturnEast()
 			{
-				var _orientation = new RobotOrientation(Renderer, NORTH);
+				var orientation = new RobotOrientation(Renderer, NORTH);
 
-				_orientation.TurnRight();
+				orientation.TurnRight();
 
-				Assert.AreEqual("E", _orientation.GetOrientationAsSingleLetterCompassPoint());
+				Assert.AreEqual("E", orientation.GetOrientationAsSingleLetterCompassPoint());
 			}
 
 			[Test]
 			public void WhenInitialOrientationIsWest_GetOrientationWillReturnNorth()
 			{
-				var _orientation = new RobotOrientation(Renderer, WEST);
+				var orientation = new RobotOrientation(Renderer, WEST);
 
-				_orientation.TurnRight();
+				orientation.TurnRight();
 
-				Assert.AreEqual("N", _orientation.GetOrientationAsSingleLetterCompassPoint());
+				Assert.AreEqual("N", orientation.GetOrientationAsSingleLetterCompassPoint());
 			}
 
 			[Test]
 			public void WhenInitialOrientationIsSouth_GetOrientationWillReturnWest()
 			{
-				var _orientation = new RobotOrientation(Renderer, SOUTH);
+				var orientation = new RobotOrientation(Renderer, SOUTH);
 
-				_orientation.TurnRight();
+				orientation.TurnRight();
 
-				Assert.AreEqual("W", _orientation.GetOrientationAsSingleLetterCompassPoint());
+				Assert.AreEqual("W", orientation.GetOrientationAsSingleLetterCompassPoint());
 			}
 
 			[Test]
 			public void WhenInitialOrientationIsEast_GetOrientationWillReturnSouth()
 			{
-				var _orientation = new RobotOrientation(Renderer, EAST);
+				var orientation = new RobotOrientation(Renderer, EAST);
 
-				_orientation.TurnRight();
+				orientation.TurnRight();
 
-				Assert.AreEqual("S", _orientation.GetOrientationAsSingleLetterCompassPoint());
+				Assert.AreEqual("S", orientation.GetOrientationAsSingleLetterCompassPoint());
 			}
 
 			[Test]
 			public void WhenTurningTwiceAndInitialOrientationIsEast_GetOrientationWillReturnWest()
 			{
-				var _orientation = new RobotOrientation(Renderer, EAST);
+				var orientation = new RobotOrientation(Renderer, EAST);
 
-				_orientation.TurnRight().TurnRight();
+				orientation.TurnRight().TurnRight();
 
-				Assert.AreEqual("W", _orientation.GetOrientationAsSingleLetterCompassPoint());
+				Assert.AreEqual("W", orientation.GetOrientationAsSingleLetterCompassPoint());
 			}
 
 			[Test]
 			public void WhenTurningThreeTimesAndInitialOrientationIsEast_GetOrientationWillReturnNorth()
 			{
-				var _orientation = new RobotOrientation(Renderer, EAST);
+				var orientation = new RobotOrientation(Renderer, EAST);
 
-				_orientation.TurnRight().TurnRight().TurnRight();
+				orientation.TurnRight().TurnRight().TurnRight();
 
-				Assert.AreEqual("N", _orientation.GetOrientationAsSingleLetterCompassPoint());
+				Assert.AreEqual("N", orientation.GetOrientationAsSingleLetterCompassPoint());
 			}
 
 			[Test]
 			public void WhenTurningFourTimesAndInitialOrientationIsEast_GetOrientationWillReturnEast()
 			{
-				var _orientation = new RobotOrientation(Renderer, EAST);
+				var orientation = new RobotOrientation(Renderer, EAST);
 
-				_orientation.TurnRight().TurnRight().TurnRight().TurnRight();
+				orientation.TurnRight().TurnRight().TurnRight().TurnRight();
 
-				Assert.AreEqual("E", _orientation.GetOrientationAsSingleLetterCompassPoint());
+				Assert.AreEqual("E", orientation.GetOrientationAsSingleLetterCompassPoint());
 			}
 
 		}
