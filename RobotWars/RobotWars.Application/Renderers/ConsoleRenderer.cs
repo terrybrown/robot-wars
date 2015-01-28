@@ -5,11 +5,11 @@ namespace RobotWars.Application.Renderers
 {
 	public class ConsoleRenderer : IOutputRenderer, IInputRenderer
 	{
-		private readonly bool _renderDebugOutput;
+		private readonly bool renderDebugOutput;
 
 		public ConsoleRenderer(bool renderDebugOutput)
 		{
-			_renderDebugOutput = renderDebugOutput;
+			this.renderDebugOutput = renderDebugOutput;
 		}
 
 		public void RenderOutput(string output, params object[] args)
@@ -26,7 +26,7 @@ namespace RobotWars.Application.Renderers
 
 		public void RenderDebug(string output, params object[] args)
 		{
-			if (_renderDebugOutput)
+			if (renderDebugOutput)
 				Console.WriteLine(output, args);
 		}
 

@@ -7,7 +7,7 @@ namespace RobotWars.Domain.Robot
 {
 	public class RobotMoves
 	{
-		private readonly Queue<char> _preProgrammedMoves;
+		private readonly Queue<char> preProgrammedMoves;
 
 		/// <exception cref="ArgumentOutOfRangeException"></exception>
 		public RobotMoves(string preProgrammedMoves)
@@ -17,13 +17,13 @@ namespace RobotWars.Domain.Robot
 				throw new ArgumentOutOfRangeException("preProgrammedMoves", "Invalid moves specificed for the robot");				
 			}
 
-			_preProgrammedMoves = new Queue<char>(preProgrammedMoves.ToList());
+			this.preProgrammedMoves = new Queue<char>(preProgrammedMoves.ToList());
 		}
 
 		public char? GetNextMove()
 		{
-			if (_preProgrammedMoves.Count > 0)
-				return _preProgrammedMoves.Dequeue();
+			if (preProgrammedMoves.Count > 0)
+				return preProgrammedMoves.Dequeue();
 
 			return null;
 		}
@@ -37,12 +37,12 @@ namespace RobotWars.Domain.Robot
 
 		public override string ToString()
 		{
-			return new string(_preProgrammedMoves.ToArray());
+			return new string(preProgrammedMoves.ToArray());
 		}
 
 		public bool HasMovedRemaining()
 		{
-			return _preProgrammedMoves.Count > 0;
+			return preProgrammedMoves.Count > 0;
 		}
 	}
 }

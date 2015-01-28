@@ -13,39 +13,39 @@ namespace RobotWars.Application
 	{
 		static void Main(string[] args)
 		{
-			var _renderer = new ConsoleRenderer(Settings.Default.RenderDebugOutput);
+			var renderer = new ConsoleRenderer(Settings.Default.RenderDebugOutput);
 
-			_renderer.RenderOutput("Robot Wars ---------------------------------------");
-			_renderer.RenderOutput("Verbose output is set to '{0}' - you can change it in app.config", Settings.Default.RenderDebugOutput);
-			_renderer.RenderOutput("");
+			renderer.RenderOutput("Robot Wars ---------------------------------------");
+			renderer.RenderOutput("Verbose output is set to '{0}' - you can change it in app.config", Settings.Default.RenderDebugOutput);
+			renderer.RenderOutput("");
 
-			int _arenaWidth	= GameDataCollection.ValidateArenaDimension(_renderer.ReadInput, 
+			int arenaWidth	= GameDataCollection.ValidateArenaDimension(renderer.ReadInput, 
 																	"Please enter the arena width", 
 																	"That's not a valid width - please enter a number between 1 and 100");
-			int _arenaHeigth = GameDataCollection.ValidateArenaDimension(_renderer.ReadInput, 
+			int arenaHeigth = GameDataCollection.ValidateArenaDimension(renderer.ReadInput, 
 																	"Please enter the arena height", 
 																	"That's not a valid height - please enter a number between 1 and 100");
 
-			var _game = new RobotWarsGame(_renderer, new GameArena(_arenaWidth, _arenaHeigth));
+			var game = new RobotWarsGame(renderer, new GameArena(arenaWidth, arenaHeigth));
 
-			_renderer.RenderOutput("Robot Factory ---------------------------------------");
-			bool _addAnotherRobot = true;
-			while (_addAnotherRobot)
+			renderer.RenderOutput("Robot Factory ---------------------------------------");
+			bool addAnotherRobot = true;
+			while (addAnotherRobot)
 			{
 				// collect first robot details here
-				CollectAndBuildRobot(_renderer, _game);
+				CollectAndBuildRobot(renderer, game);
 
-				_renderer.RenderOutput("");
-				_renderer.RenderOutput("Add another robot?");
-				_addAnotherRobot = GeneralDataCollection.DoesInputMatchSuccessValue(_renderer.ReadInput, "Y");
+				renderer.RenderOutput("");
+				renderer.RenderOutput("Add another robot?");
+				addAnotherRobot = GeneralDataCollection.DoesInputMatchSuccessValue(renderer.ReadInput, "Y");
 			}
 
-			_game.PlayGame();
+			game.PlayGame();
 
 			Console.ForegroundColor = ConsoleColor.Cyan;
-			_renderer.RenderOutput("Final Positions ------------------------------------------------");
+			renderer.RenderOutput("Final Positions ------------------------------------------------");
 			
-			_game.GetFinalPositions();
+			game.GetFinalPositions();
 
 			Console.ReadKey();
 		}
@@ -53,28 +53,28 @@ namespace RobotWars.Application
 		private static void CollectAndBuildRobot(ConsoleRenderer renderer, RobotWarsGame game)
 		{
 
-			Point _positionOnArena = RobotDataCollection.CollectPosition(renderer.ReadInput, 
+			Point positionOnArena = RobotDataCollection.CollectPosition(renderer.ReadInput, 
 													"Please enter the robot's position on the arena in X,Y format:",
 													"That's not a valid position - please enter in the format X,Y"
 													);
 
 
 
-			Orientation _robotOrientation = RobotDataCollection.ValidateOrientation(renderer.ReadInput,
+			Orientation robotOrientation = RobotDataCollection.ValidateOrientation(renderer.ReadInput,
 													"Please enter the robots orientation as a compass point (N, E, S, W):",
 													"That is not a valid compass point");
 
 
 			renderer.RenderOutput("Your robot can turn (L)eft, turn (R)ight, and (M)ove forward");
-			string _preProgrammedMoves = RobotDataCollection.ValidatePreProgrammedMoves(renderer.ReadInput,
+			string preProgrammedMoves = RobotDataCollection.ValidatePreProgrammedMoves(renderer.ReadInput,
 													"Please enter the robots pre-programmed moves as a collection of L M R:",
 													"Your robot doesn't have any valid moves - valid inputs are L, M and R");
 
-			IRobot _robot = new Robot(renderer, _positionOnArena, _robotOrientation, _preProgrammedMoves);
+			IRobot robot = new Robot(renderer, positionOnArena, robotOrientation, preProgrammedMoves);
 
 			try
 			{
-				game.AddRobotToGame(_robot);
+				game.AddRobotToGame(robot);
 			}
 			catch (ArgumentOutOfRangeException)
 			{

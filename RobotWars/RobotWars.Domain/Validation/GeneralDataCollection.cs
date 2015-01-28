@@ -6,9 +6,9 @@ namespace RobotWars.Domain.Validation
 	{
 		public static bool DoesInputMatchSuccessValue(Func<string> userInputValueCollector, string successValue)
 		{
-			string _userInput = userInputValueCollector.Invoke() ?? string.Empty;
+			string userInput = userInputValueCollector.Invoke() ?? string.Empty;
 
-			return _userInput.Equals(successValue, StringComparison.InvariantCultureIgnoreCase);
+			return userInput.Equals(successValue, StringComparison.InvariantCultureIgnoreCase);
 
 		}
 	}

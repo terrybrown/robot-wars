@@ -6,8 +6,8 @@ namespace RobotWars.Domain.Robot
 {
 	public class RobotOrientation
 	{
-		private readonly IOutputRenderer _renderer;
-		private Orientation _currentOrientation;
+		private readonly IOutputRenderer renderer;
+		private Orientation currentOrientation;
 		private static readonly Orientation[] ValidOrientations = { Orientation.North, 
 																	Orientation.East, 
 																	Orientation.South,
@@ -15,43 +15,43 @@ namespace RobotWars.Domain.Robot
 
 		public RobotOrientation(IOutputRenderer renderer, Orientation orientation = Orientation.North)
 		{
-			_renderer = renderer;
-			_currentOrientation = orientation;
+			this.renderer = renderer;
+			currentOrientation = orientation;
 		}
 
 		public RobotOrientation TurnLeft()
 		{
-			_renderer.RenderDebug("Turning left");
+			renderer.RenderDebug("Turning left");
 
-			int _nextIndex = Array.IndexOf(ValidOrientations, _currentOrientation) - 1;
-			if (_nextIndex < 0)
+			int nextIndex = Array.IndexOf(ValidOrientations, currentOrientation) - 1;
+			if (nextIndex < 0)
 			{
-				_nextIndex = ValidOrientations.Length -1;
+				nextIndex = ValidOrientations.Length -1;
 			}
 
-			_currentOrientation = ValidOrientations[_nextIndex];
+			currentOrientation = ValidOrientations[nextIndex];
 			
 			return this;
 		}
 
 		public RobotOrientation TurnRight()
 		{
-			_renderer.RenderDebug("Turning right");
+			renderer.RenderDebug("Turning right");
 	
-			int _nextIndex = Array.IndexOf(ValidOrientations, _currentOrientation) + 1;
-			if (_nextIndex > ValidOrientations.Length -1)
+			int nextIndex = Array.IndexOf(ValidOrientations, currentOrientation) + 1;
+			if (nextIndex > ValidOrientations.Length -1)
 			{
-				_nextIndex = 0;
+				nextIndex = 0;
 			}
 
-			_currentOrientation = ValidOrientations[_nextIndex];
+			currentOrientation = ValidOrientations[nextIndex];
 
 			return this;
 		}
 
 		public string GetOrientationAsSingleLetterCompassPoint()
 		{
-			return _currentOrientation.ToString().Substring(0, 1);	// better way than this, quick fix for now
+			return currentOrientation.ToString().Substring(0, 1);	// better way than this, quick fix for now
 		}
 
 		public static bool TryParseOrientation(string inputOrientation, out Orientation orientation)
@@ -62,34 +62,34 @@ namespace RobotWars.Domain.Robot
 				return false;
 			}
 
-			Orientation _parsedOrientation;
+			Orientation parsedOrientation;
 			switch (inputOrientation.Substring(0, 1).ToUpperInvariant())
 			{
 				case "N":
-					_parsedOrientation = Orientation.North;
+					parsedOrientation = Orientation.North;
 					break;
 				case "E":
-					_parsedOrientation = Orientation.East;
+					parsedOrientation = Orientation.East;
 					break;
 				case "S":
-					_parsedOrientation = Orientation.South;
+					parsedOrientation = Orientation.South;
 					break;
 				case "W":
-					_parsedOrientation = Orientation.West;
+					parsedOrientation = Orientation.West;
 					break;
 				default:
 					orientation = Orientation.North;
 					return false;
 					
 			}
-			orientation = _parsedOrientation;
+			orientation = parsedOrientation;
 
-			return ValidOrientations.Any( x => x == _parsedOrientation);
+			return ValidOrientations.Any( x => x == parsedOrientation);
 		}
 
 		public override string ToString()
 		{
-			return _currentOrientation.ToString();
+			return currentOrientation.ToString();
 		}
 	}
 }
